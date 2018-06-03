@@ -20,10 +20,15 @@ module.exports = {
       })
       // Extend only webpack config for client-bundle
       if (isClient) { config.target = 'electron-renderer' }
-    }
+    },
+    vendor: ['element-ui']
   },
+  plugins: [
+    '~plugins/element-ui'
+  ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
-    '@/assets/css/global.css'
+    '@/assets/css/global.css',
+    'element-ui/lib/theme-chalk/index.css'
   ]
 }
