@@ -21,5 +21,5 @@ article
   display: flex
 
 .color-test
-  color: #cf2d3a
+  color: $color-blue
 </style>
