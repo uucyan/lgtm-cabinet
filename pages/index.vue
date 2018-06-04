@@ -1,6 +1,7 @@
 <template lang="pug">
 article
   sidebar
+  p.color-test {{ helloWorld }}
 </template>
 
 <script lang="coffee">
@@ -13,9 +14,12 @@ export default
     'sidebar': Sidebar
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 article
   min-height: 100vh
   min-width: 100vh
   display: flex
+
+.color-test
+  color: $color-blue
 </style>
