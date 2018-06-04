@@ -28,7 +28,7 @@ module.exports = {
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
-    '@/assets/css/global.css',
+    '~/assets/styles/global.sass',
     'element-ui/lib/theme-chalk/index.css'
   ]
 }

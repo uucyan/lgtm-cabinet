@@ -38,7 +38,7 @@ el-menu.el-menu-vertical-demo(default-active='2', @open='handleOpen', @close='ha
 <script lang="coffee">
 </script>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 ul
   width: 250pX
   height: 100vh
