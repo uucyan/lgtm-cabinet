@@ -1,17 +1,18 @@
 <template lang="pug">
 article
   sidebar
-  p.color-test {{ helloWorld }}
+  main-view
 </template>
 
 <script lang="coffee">
 import Sidebar from '~/components/sidebar.vue'
+import Main from '~/components/main.vue'
+
 export default
   name: 'index'
-  data: ->
-    helloWorld: 'はろーわーるど！'
   components:
     'sidebar': Sidebar
+    'main-view': Main
 </script>
 
 <style lang="sass" scoped>
