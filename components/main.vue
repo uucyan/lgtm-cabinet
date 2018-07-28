@@ -7,7 +7,6 @@ section
 
 <script lang="coffee">
 export default
-  name: 'main'
   data: ->
     images: [
       { path: "@/assets/img/logo.png" },

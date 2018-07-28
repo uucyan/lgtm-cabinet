@@ -9,7 +9,6 @@ import Sidebar from '~/components/sidebar.vue'
 import Main from '~/components/main.vue'
 
 export default
-  name: 'index'
   components:
     'sidebar': Sidebar
     'main-view': Main
