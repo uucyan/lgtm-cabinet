@@ -1,5 +1,5 @@
 <template lang="pug">
-el-dialog(title="フォルダ管理", :visible.sync="dialogVisible", width="50%", :before-close="close")
+el-dialog(title="フォルダ管理", :visible.sync="folderManagementDialogVisible", width="50%", :before-close="close")
   span ここに画像フォルダの一覧を表示する。
   br
   span 画像フォルダの追加や削除はこのダイアログから行う。
@@ -10,7 +10,7 @@ el-dialog(title="フォルダ管理", :visible.sync="dialogVisible", width="50%"
 
 <script lang="coffee">
 export default
-  props: ['dialogVisible']
+  props: ['folderManagementDialogVisible']
   methods:
     close: -> this.$emit('close')
 </script>

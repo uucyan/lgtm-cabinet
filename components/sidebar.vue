@@ -6,10 +6,10 @@ section
       template(slot='title')
         //- i.el-icon-more-outline
         span フォルダ管理・設定
-      el-menu-item(index='1-1', @click="dialogVisible = true")
+      el-menu-item(index='1-1', @click="folderManagementDialogVisible = true")
         i.el-icon-plus
         span フォルダ管理
-      el-menu-item(index='1-2')
+      el-menu-item(index='1-2', @click="configDialogVisible = true")
         i.el-icon-setting
         span 設定
       //- el-menu-item-group(title='Group One')
@@ -32,19 +32,25 @@ section
     el-menu-item(index='5', disabled='')
       i.el-icon-picture-outline
       span 長いディレクトリ名長いディレクトリ名長いディレクトリ名長いディレクトリ名
-  folder_management_dialog(:dialogVisible="dialogVisible", @close="closeDialog")
+  folder_management_dialog(:folderManagementDialogVisible="folderManagementDialogVisible", @close="closeDialog")
+  config_dialog(:configDialogVisible="configDialogVisible", @close="closeDialog")
 </template>
 
 <script lang="coffee">
 import FolderManagementDialog from '~/components/folder_management_dialog.vue'
+import ConfigDialog from '~/components/config_dialog.vue'
 
 export default
   data: ->
-    dialogVisible: false
+    folderManagementDialogVisible: false
+    configDialogVisible: false
   methods:
-    closeDialog: -> this.dialogVisible = false
+    closeDialog: ->
+      this.folderManagementDialogVisible = false
+      this.configDialogVisible = false
   components:
     'folder_management_dialog': FolderManagementDialog
+    'config_dialog': ConfigDialog
 </script>
 
 <style lang="sass" scoped>
