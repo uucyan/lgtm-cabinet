@@ -5,9 +5,32 @@ el-dialog(
   width="50%",
   :before-close="close"
 )
-  span ここに画像フォルダの一覧を表示する。
-  br
-  span 画像フォルダの追加や削除はこのダイアログから行う。
+  el-button(@click="insertFolder") 追加
+  el-table(
+    :data='folders',
+    style='width: 100%',
+    max-height="250"
+  )
+    el-table-column(
+      prop='name',
+      label='フォルダ名',
+      width='180'
+    )
+    el-table-column(
+      prop='path',
+      label='パス',
+    )
+    el-table-column(
+      fixed='right',
+      label='操作',
+      width='120'
+    )
+      template(slot-scope='scope')
+        el-button(
+          size='mini',
+          type='danger',
+          @click='deleteFolder(scope.row)'
+        ) Delete
   span(
     slot="footer",
     class="dialog-footer"
@@ -21,10 +44,29 @@ el-dialog(
 
 <script lang="coffee">
 export default
+  data: ->
+    folders: []
+  created: ->
+    @setFolders()
   props:
     folderManagementDialogVisible: Boolean
   methods:
-    close: -> this.$emit('close')
+    close: -> @$emit('close')
+    setFolders: ->
+      @$db.folders.find {}, ((err, docs) ->
+        @folders = docs
+      ).bind(this)
+    insertFolder: ->
+      doc =
+        name: 'テストフォルダ'
+        path: 'test/img.png'
+      @$db.folders.insert doc, (err, newDoc) ->
+        console.log('err：' + err)
+      @setFolders()
+    deleteFolder:(folder) ->
+      @$db.folders.remove { _id: folder._id }, {}, (err, numRemoved) ->
+        console.log('err：' + err)
+      @setFolders()
 </script>
 
 <style lang="sass" scoped>

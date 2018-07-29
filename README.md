@@ -55,6 +55,14 @@ yarn add element-ui -S
 yarn add --dev nuxt-sass-resources-loader
 ```
 
+### NeDB のインストール
+[GitHub - louischatriot/nedb: The JavaScript Database, for Node.js, nw.js, electron and the browser](https://github.com/louischatriot/nedb)
+
+**インストール**
+```bash
+yarn add nedb
+```
+
 ## 📌 CoffeeScript を Vue ファイル内で動かすための設定
 下記ファイルの `loader: 'eslint-loader',` をコメントアウトする。
 
@@ -118,3 +126,39 @@ modules: [
 
 - 参考
   - [《Nuxt.js》Sassの共通の変数やmixinを一括で各コンポーネントに読み込む方法。](https://qiita.com/uto-usui/items/6b745203fa6fad577877)
+
+  ## 📌 NeDB を使うための設定
+  1. DB用のファイル追加
+  下記みたいな感じで追加する。
+  `/plugins/db/folders.db`
+
+  2. datastore ファイルを追加
+  `/plugins/datastore.js`
+  ```js
+  import Vue from 'vue'
+  import Datastore from 'nedb'
+
+  let db = {}
+  db.folders = new Datastore({
+    autoload: true,
+    filename: 'plugins/db/folders.db' // 作成した DB ファイルを指定
+  })
+  db.folders.loadDatabase()
+
+  // すべての Component から db を使用できるように、Vue のプロトタイプに追加する。
+  // 各 Component で使用する際は this.$db.folders のように参照する。
+  Vue.prototype.$db = db
+  ```
+  ※上記記述例
+
+  3. nuxt.config.js に設定追加
+  ```js
+  plugins: [
+    '~plugins/element-ui',
+    '~plugins/datastore', // ココ追加
+  ],
+  ```
+
+  - 参考
+    - [NeDB を使ってみた](https://qiita.com/tinymouse/items/0731eef4aebf2779bd0b)
+    - [electron-vue/savingreading-local-files.md at 99f044896bf3add09d072e9f278ef9d8380337f4 · SimulatedGREG/electron-vue · GitHub](https://github.com/SimulatedGREG/electron-vue/blob/99f044896bf3add09d072e9f278ef9d8380337f4/docs/ja/savingreading-local-files.md)

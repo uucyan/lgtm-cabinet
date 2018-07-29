@@ -31,21 +31,28 @@ section
       //- el-submenu(index='1-4')
       //-   template(slot='title') item four
       //-   el-menu-item(index='1-4-1') item one
-    el-menu-item(index='2')
-      i.el-icon-picture-outline
-      span アニメ 静止画
-    el-menu-item(index='3')
-      i.el-icon-picture-outline
-      span アニメ gif
-    el-menu-item(index='4')
-      i.el-icon-picture-outline
-      span 面白い系
     el-menu-item(
-      index='5',
-      disabled=''
+      v-for="(folder, index) in folders",
+      :key="folder._id",
+      :index="index + '2'"
     )
       i.el-icon-picture-outline
-      span 長いディレクトリ名長いディレクトリ名長いディレクトリ名長いディレクトリ名
+      span {{ folder.name }}
+    //- el-menu-item(index='2')
+    //-   i.el-icon-picture-outline
+    //-   span アニメ 静止画
+    //- el-menu-item(index='3')
+    //-   i.el-icon-picture-outline
+    //-   span アニメ gif
+    //- el-menu-item(index='4')
+    //-   i.el-icon-picture-outline
+    //-   span 面白い系
+    //- el-menu-item(
+    //-   index='5',
+    //-   disabled=''
+    //- )
+    //-   i.el-icon-picture-outline
+    //-   span 長いディレクトリ名長いディレクトリ名長いディレクトリ名長いディレクトリ名
   folder-management-dialog(
     :folderManagementDialogVisible="folderManagementDialogVisible",
     @close="closeDialog"
@@ -65,10 +72,18 @@ export default
   data: ->
     folderManagementDialogVisible: false
     configDialogVisible: false
+    folders: []
+  created: ->
+    @setFolders()
   methods:
+    setFolders: ->
+      @$db.folders.find {}, ((err, docs) ->
+        @folders = docs
+      ).bind(this)
     closeDialog: ->
       this.folderManagementDialogVisible = false
       this.configDialogVisible = false
+      @setFolders()
   components:
     'folder-management-dialog': FolderManagementDialog
     'config-dialog': ConfigDialog
