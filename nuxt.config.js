@@ -25,6 +25,7 @@ module.exports = {
   },
   plugins: [
     '~plugins/element-ui',
+    '~plugins/datastore',
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
