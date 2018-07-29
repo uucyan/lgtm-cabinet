@@ -1,17 +1,18 @@
 <template lang="pug">
 article
-  sidebar
-  main-view
+  the-sidebar
+  image-list
 </template>
 
 <script lang="coffee">
-import Sidebar from '~/components/sidebar.vue'
-import Main from '~/components/main.vue'
+import TheSidebar from '~/components/TheSidebar.vue'
+import ImageList from '~/components/ImageList.vue'
 
 export default
+  name: 'Index'
   components:
-    'sidebar': Sidebar
-    'main-view': Main
+    'the-sidebar': TheSidebar
+    'image-list': ImageList
 </script>
 
 <style lang="sass" scoped>

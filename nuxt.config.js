@@ -28,14 +28,14 @@ module.exports = {
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
-    '@/assets/styles/global.sass',
+    '@/assets/sass/global.sass',
     'element-ui/lib/theme-chalk/index.css',
   ],
   modules: [
     [
       'nuxt-sass-resources-loader',
       [
-        '@/assets/styles/variables/_color.sass',
+        '@/assets/sass/variables/_color.sass',
       ]
     ],
   ],

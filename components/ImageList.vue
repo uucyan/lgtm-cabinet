@@ -2,11 +2,16 @@
 section
   ul.itemlist.cf
     li(v-for="image in images")
-      img(:src="requireImg(image.path)", width='300', height='200')
+      img(
+        :src="requireImg(image.path)",
+        width='300',
+        height='200'
+      )
 </template>
 
 <script lang="coffee">
 export default
+  name: 'ImageList'
   data: ->
     images: [
       { path: "@/assets/img/logo.png" },
