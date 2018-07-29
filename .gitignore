@@ -12,3 +12,7 @@ dist
 
 # Mac OS
 .DS_Store
+
+# DB files
+plugins/db/config.db
+plugins/db/folders.db
