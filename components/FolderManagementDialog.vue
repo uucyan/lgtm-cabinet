@@ -5,7 +5,7 @@ el-dialog(
   width="50%",
   :before-close="close"
 )
-  el-button(@click="insertFolder") 追加
+  el-button(@click="showOpenFolderSelectDialog") 追加
   el-table(
     :data='folders',
     style='width: 100%',
@@ -43,6 +43,9 @@ el-dialog(
 </template>
 
 <script lang="coffee">
+remote = require('electron').remote
+dialog = remote.dialog
+
 export default
   data: ->
     folders: []
@@ -56,16 +59,23 @@ export default
       @$db.folders.find {}, ((err, docs) ->
         @folders = docs
       ).bind(this)
-    insertFolder: ->
+    showOpenFolderSelectDialog: ->
+      folderPath = dialog.showOpenDialog null,
+        properties: [ 'openDirectory' ]
+        title: 'フォルダ'
+        defaultPath: '.'
+      if folderPath?
+        @insertFolder(folderPath[0])
+    insertFolder:(folderPath) ->
       doc =
-        name: 'テストフォルダ'
-        path: 'test/img.png'
+        name: folderPath.split('/').pop()
+        path: folderPath
       @$db.folders.insert doc, (err, newDoc) ->
-        console.log('err：' + err)
+        console.log('error：' + err)
       @setFolders()
     deleteFolder:(folder) ->
       @$db.folders.remove { _id: folder._id }, {}, (err, numRemoved) ->
-        console.log('err：' + err)
+        console.log('error：' + err)
       @setFolders()
 </script>
 
