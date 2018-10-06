@@ -1,7 +1,16 @@
-module.exports = {
+const prodRouterBase = process.env.NODE_ENV === 'DEV' ? {} : {
+  router: {
+    base: './'
+  }
+}
+
+module.exports = { ...prodRouterBase,
   mode: 'spa',
   head: {title: 'lgtm-cabinet'}, // Headers of the page
   loading: false, // Disable default loading bar
+  generate: {
+    dir: 'dist/electron'
+  },
   build: {
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -40,4 +49,5 @@ module.exports = {
       ]
     ],
   ],
+  rootDir: __dirname
 }
