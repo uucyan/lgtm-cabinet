@@ -2,7 +2,7 @@
 section
   //- el-menu.el-menu-vertical-demo(default-active='2', @open='handleOpen', @close='handleClose', background-color='#545c64', text-color='#fff', active-text-color='#ffd04b')
   el-menu.el-menu-vertical-demo(
-    default-active='2',
+    default-active='1',
     background-color='#545c64',
     text-color='#fff',
     active-text-color='#ffd04b'
@@ -31,6 +31,7 @@ section
       //- el-submenu(index='1-4')
       //-   template(slot='title') item four
       //-   el-menu-item(index='1-4-1') item one
+
     el-menu-item(
       v-for="(folder, index) in folders",
       :key="folder._id",
@@ -38,6 +39,7 @@ section
     )
       i.el-icon-picture-outline
       span {{ folder.name }}
+
     //- el-menu-item(index='2')
     //-   i.el-icon-picture-outline
     //-   span アニメ 静止画
@@ -72,18 +74,12 @@ export default
   data: ->
     folderManagementDialogVisible: false
     configDialogVisible: false
-    folders: []
-  created: ->
-    @setFolders()
+  computed:
+    folders: -> @$store.state.folders.list
   methods:
-    setFolders: ->
-      @$db.folders.find {}, ((err, docs) ->
-        @folders = docs
-      ).bind(this)
     closeDialog: ->
       this.folderManagementDialogVisible = false
       this.configDialogVisible = false
-      @setFolders()
   components:
     'folder-management-dialog': FolderManagementDialog
     'config-dialog': ConfigDialog
