@@ -47,18 +47,12 @@ remote = require('electron').remote
 dialog = remote.dialog
 
 export default
-  data: ->
-    folders: []
-  created: ->
-    @setFolders()
+  computed:
+    folders: -> @$store.state.folders.list
   props:
     folderManagementDialogVisible: Boolean
   methods:
     close: -> @$emit('close')
-    setFolders: ->
-      @$db.folders.find {}, ((err, docs) ->
-        @folders = docs
-      ).bind(this)
     showOpenFolderSelectDialog: ->
       folderPath = dialog.showOpenDialog null,
         properties: [ 'openDirectory' ]
@@ -67,16 +61,9 @@ export default
       if folderPath?
         @insertFolder(folderPath[0])
     insertFolder:(folderPath) ->
-      doc =
-        name: folderPath.split('/').pop()
-        path: folderPath
-      @$db.folders.insert doc, (err, newDoc) ->
-        console.log('error：' + err)
-      @setFolders()
+      @$store.dispatch('folders/insert', folderPath)
     deleteFolder:(folder) ->
-      @$db.folders.remove { _id: folder._id }, {}, (err, numRemoved) ->
-        console.log('error：' + err)
-      @setFolders()
+      @$store.dispatch('folders/delete', folder)
 </script>
 
 <style lang="sass" scoped>

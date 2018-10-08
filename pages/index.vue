@@ -13,6 +13,8 @@ export default
   components:
     'the-sidebar': TheSidebar
     'image-list': ImageList
+  created: ->
+    @$store.dispatch('folders/findAll')
 </script>
 
 <style lang="sass" scoped>
