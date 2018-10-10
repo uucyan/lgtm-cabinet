@@ -1,6 +1,5 @@
 <template lang="pug">
-section
-  //- el-menu.el-menu-vertical-demo(default-active='2', @open='handleOpen', @close='handleClose', background-color='#545c64', text-color='#fff', active-text-color='#ffd04b')
+section(class='menu-area')
   el-menu.el-menu-vertical-demo(
     default-active='1',
     background-color='#545c64',
@@ -9,29 +8,28 @@ section
   )
     el-submenu(index='1')
       template(slot='title')
-        //- i.el-icon-more-outline
+        i.el-icon-more-outline
         span フォルダ管理・設定
       el-menu-item(
+        id='folder-management-menu-item'
         index='1-1',
-        @click="folderManagementDialogVisible = true"
+        @click="openFolderManagementDialog('folder-management-menu-item')"
       )
         i.el-icon-plus
         span フォルダ管理
       el-menu-item(
+        id='config-menu-item'
         index='1-2',
-        @click="configDialogVisible = true"
+        @click="openConfigDialog('config-menu-item')"
       )
         i.el-icon-setting
         span 設定
-      //- el-menu-item-group(title='Group One')
-      //-   el-menu-item(index='1-1') item one
-      //-   el-menu-item(index='1-2') item one
-      //- el-menu-item-group(title='Group Two')
-      //-   el-menu-item(index='1-3') item three
-      //- el-submenu(index='1-4')
-      //-   template(slot='title') item four
-      //-   el-menu-item(index='1-4-1') item one
-
+  el-menu.el-menu-vertical-demo(
+    default-active='1',
+    background-color='#545c64',
+    text-color='#fff',
+    active-text-color='#ffd04b'
+  )
     el-menu-item(
       v-for="(folder, index) in folders",
       :key="folder._id",
@@ -39,22 +37,6 @@ section
     )
       i.el-icon-picture-outline
       span {{ folder.name }}
-
-    //- el-menu-item(index='2')
-    //-   i.el-icon-picture-outline
-    //-   span アニメ 静止画
-    //- el-menu-item(index='3')
-    //-   i.el-icon-picture-outline
-    //-   span アニメ gif
-    //- el-menu-item(index='4')
-    //-   i.el-icon-picture-outline
-    //-   span 面白い系
-    //- el-menu-item(
-    //-   index='5',
-    //-   disabled=''
-    //- )
-    //-   i.el-icon-picture-outline
-    //-   span 長いディレクトリ名長いディレクトリ名長いディレクトリ名長いディレクトリ名
   folder-management-dialog(
     :folderManagementDialogVisible="folderManagementDialogVisible",
     @close="closeDialog"
@@ -74,21 +56,46 @@ export default
   data: ->
     folderManagementDialogVisible: false
     configDialogVisible: false
+    selectMenuItemId: ''
   computed:
     folders: -> @$store.state.folders.list
   methods:
+    openFolderManagementDialog:(id) ->
+      @folderManagementDialogVisible = true
+      @selectMenuItemId = id
+      @changeSelectMenuItemStyle('open')
+    openConfigDialog:(id) ->
+      @configDialogVisible = true
+      @selectMenuItemId = id
+      @changeSelectMenuItemStyle('open')
     closeDialog: ->
-      this.folderManagementDialogVisible = false
-      this.configDialogVisible = false
+      @folderManagementDialogVisible = false
+      @configDialogVisible = false
+      @changeSelectMenuItemStyle('close')
+    changeSelectMenuItemStyle:(action) ->
+      element = document.getElementById @selectMenuItemId
+      if !element?
+        return
+      if action == 'open'
+        element.style.color = 'rgb(255, 208, 75)'
+        element.className = "el-menu-item is-active"
+      else
+        element.style.color = 'rgb(255, 255, 255)'
+        element.className = "el-menu-item"
+    select:(folder) ->
+      @$store.dispatch('folders/select', folder)
   components:
     'folder-management-dialog': FolderManagementDialog
     'config-dialog': ConfigDialog
 </script>
 
 <style lang="sass" scoped>
+.menu-area
+  height: 100vh
+  background-color: #545c64
+
 ul
   width: 250px
-  height: 100vh
   overflow-y: auto
 
 li
