@@ -8,7 +8,7 @@ section(class='menu-area')
   )
     el-submenu(index='1')
       template(slot='title')
-        i.el-icon-more-outline
+        //- i.el-icon-more-outline
         span フォルダ管理・設定
       el-menu-item(
         id='folder-management-menu-item'
@@ -34,6 +34,7 @@ section(class='menu-area')
       v-for="(folder, index) in folders",
       :key="folder._id",
       :index="index + '2'"
+      @click="select(folder)"
     )
       i.el-icon-picture-outline
       span {{ folder.name }}
@@ -83,7 +84,8 @@ export default
         element.style.color = 'rgb(255, 255, 255)'
         element.className = "el-menu-item"
     select:(folder) ->
-      @$store.dispatch('folders/select', folder)
+      # @$store.dispatch('folders/select', folder)
+      @$store.dispatch('folders/getImagePaths', folder)
   components:
     'folder-management-dialog': FolderManagementDialog
     'config-dialog': ConfigDialog

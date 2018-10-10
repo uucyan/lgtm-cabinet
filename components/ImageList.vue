@@ -3,7 +3,7 @@ section
   ul.itemlist.cf
     li(v-for="image in images")
       img(
-        :src="requireImg(image.path)",
+        :src="image",
         width='300',
         height='200'
       )
@@ -12,15 +12,17 @@ section
 <script lang="coffee">
 export default
   name: 'ImageList'
-  data: ->
-    images: [
-      { path: "@/assets/img/logo.png" },
-      { path: '@/assets/img/logo.png' },
-      { path: '@/assets/img/logo.png' },
-      { path: '@/assets/img/logo.png' },
-      { path: '@/assets/img/logo.png' },
-      { path: '@/assets/img/logo.png' }
-    ]
+  # data: ->
+  #   images: [
+  #     { path: "@/assets/img/logo.png" },
+  #     { path: '@/assets/img/logo.png' },
+  #     { path: '@/assets/img/logo.png' },
+  #     { path: '@/assets/img/logo.png' },
+  #     { path: '@/assets/img/logo.png' },
+  #     { path: '@/assets/img/logo.png' }
+  #   ]
+  computed:
+    images: -> @$store.state.folders.images
   methods:
     requireImg:(imgPath) ->
       require("@/assets/img/logo.png")
