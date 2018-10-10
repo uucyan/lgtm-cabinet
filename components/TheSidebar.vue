@@ -8,7 +8,6 @@ section(class='menu-area')
   )
     el-submenu(index='1')
       template(slot='title')
-        //- i.el-icon-more-outline
         span フォルダ管理・設定
       el-menu-item(
         id='folder-management-menu-item'
@@ -84,7 +83,6 @@ export default
         element.style.color = 'rgb(255, 255, 255)'
         element.className = "el-menu-item"
     select:(folder) ->
-      # @$store.dispatch('folders/select', folder)
       @$store.dispatch('folders/getImagePaths', folder)
   components:
     'folder-management-dialog': FolderManagementDialog
