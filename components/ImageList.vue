@@ -1,8 +1,11 @@
 <template lang="pug">
-//- section
 el-container
-  el-header(style='text-align: right; font-size: 12px')
-    el-button(type='primary', round='' icon='el-icon-printer' @click="randomCopy()") ランダムコピー
+  el-header
+    div(style='float: left;')
+      p.postit \#{{ folderName }}
+      p.postit \#{{ imagesLength }}枚
+    div(style='float: right;')
+      el-button(type='primary', round='' icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー
   el-main
     ul.itemlist.cf
       li(v-for="image in images")
@@ -36,6 +39,9 @@ export default
   #   ]
   computed:
     images: -> @$store.state.folders.images
+    folderName: -> @$store.state.folders.selectFolderName
+    imagesLength: -> @$store.getters['folders/getImagesLength']
+    isExistsImages: -> @$store.getters['folders/isExistsImages']
   methods:
     # 画像をランダムで選択
     randomCopy: ->
@@ -66,6 +72,7 @@ section
   overflow-y: auto
   padding: 20px
 
+
 //- ul
 //-   // width: auto
 //-   padding: 0
@@ -78,6 +85,31 @@ section
 //- .image
 //-   width: 35vh
 //-   // display: block
+
+.postit
+  margin: 0
+  font-size: 24px
+  position: relative
+  font-weight: normal
+  display: inline-block
+  background-color: #feeaac
+  padding: 10px
+  margin-bottom: 10px
+  border-radius: 2px
+  margin-right: 20px
+
+.postit:before
+  content: ''
+  background-color: #b3b3b3
+  display: block
+  position: absolute
+  left: 50%
+  height: 60%
+  top: 26%
+  z-index: -1
+  width: 46%
+  box-shadow: 0 0 8px 8px #b3b3b3
+  transform: rotate(3deg)
 
 .itemlist
   max-width: 1024px

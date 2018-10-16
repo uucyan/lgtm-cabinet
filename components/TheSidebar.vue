@@ -84,6 +84,7 @@ export default
         element.className = "el-menu-item"
     select:(folder) ->
       @$store.dispatch('folders/getImagePaths', folder)
+      @$store.commit('folders/setSelectFolderName', folder.name)
   components:
     'folder-management-dialog': FolderManagementDialog
     'config-dialog': ConfigDialog

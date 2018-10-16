@@ -6,6 +6,7 @@ import mime from 'mime-types'
 export const state = () => ({
   list: [],
   images: [],
+  selectFolderName: 'フォルダ未選択',
 })
 
 export const getters = {
@@ -14,7 +15,10 @@ export const getters = {
   },
   getRandomImage(state) {
     return state.images[Math.floor(Math.random() * state.images.length)]
-  }
+  },
+  getImagesLength(state) {
+    return state.images.length
+  },
 }
 
 export const mutations = {
@@ -23,6 +27,9 @@ export const mutations = {
   },
   setImages(state, images) {
     state.images = images;
+  },
+  setSelectFolderName(state, name) {
+    state.selectFolderName = name;
   }
 }
 
