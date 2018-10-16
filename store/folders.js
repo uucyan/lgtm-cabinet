@@ -8,6 +8,15 @@ export const state = () => ({
   images: [],
 })
 
+export const getters = {
+  isExistsImages(state) {
+    return state.images.length != 0
+  },
+  getRandomImage(state) {
+    return state.images[Math.floor(Math.random() * state.images.length)]
+  }
+}
+
 export const mutations = {
   set(state, docs) {
     state.list = docs;
