@@ -1,7 +1,7 @@
 <template lang="pug">
 //- section
 el-container
-  el-header(style='text-align: left; font-size: 12px')
+  el-header(style='text-align: right; font-size: 12px')
     el-button(type='primary', round='' icon='el-icon-printer' @click="randomCopy()") ランダムコピー
   el-main
     ul.itemlist.cf
@@ -37,16 +37,19 @@ export default
   computed:
     images: -> @$store.state.folders.images
   methods:
+    # 画像をランダムで選択
     randomCopy: ->
       if !@$store.getters['folders/isExistsImages']
         return @showMessage('warning')
       @copyToClipboard @$store.getters['folders/getRandomImage']
+    # 選択画像をクリップボードにコピー
     copyToClipboard:(path) ->
       image = nativeImage.createFromPath(path)
       if image.isEmpty()
         return @showMessage('error')
       clipboard.writeImage(image)
       @showMessage('success')
+    # 画面上部にメッセージを表示
     showMessage:(type) ->
       @$message
         showClose: true
