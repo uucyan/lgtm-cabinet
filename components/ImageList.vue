@@ -2,7 +2,8 @@
 el-container
   el-header
     div(style='float: left;')
-      p.postit \#{{ folderName }}
+      p.postit(v-if="folderName") \#{{ folderName }}
+      p.postit(v-else) #フォルダ未選択
       p.postit \#{{ imagesLength }}枚
     div(style='float: right;')
       el-button(type='primary', round='' icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー

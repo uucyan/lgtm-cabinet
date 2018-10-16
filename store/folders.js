@@ -6,7 +6,7 @@ import mime from 'mime-types'
 export const state = () => ({
   list: [],
   images: [],
-  selectFolderName: 'フォルダ未選択',
+  selectFolderName: '',
 })
 
 export const getters = {
