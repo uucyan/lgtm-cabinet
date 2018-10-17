@@ -93,6 +93,7 @@ export default
 <style lang="sass" scoped>
 .menu-area
   height: 100vh
+  width: 250px
   background-color: #545c64
 
 ul

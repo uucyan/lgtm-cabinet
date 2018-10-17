@@ -19,8 +19,8 @@ export default
 
 <style lang="sass" scoped>
 article
-  min-height: 100vh
-  min-width: 100vh
+  // min-height: 100vh
+  // min-width: 100vh
   display: flex
 
 .color-test
