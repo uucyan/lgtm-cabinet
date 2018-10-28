@@ -40,7 +40,7 @@ el-container.main
 </template>
 
 <script lang="coffee">
-import ConfirmDialog from '~/components/ConfirmDialog.vue'
+import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
 remote = require('electron').remote
 dialog = remote.dialog
 
