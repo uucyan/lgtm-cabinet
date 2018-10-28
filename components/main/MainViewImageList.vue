@@ -28,7 +28,7 @@ nativeImage = require('electron').nativeImage
 export default
   name: 'MainViewImageList'
   data: ->
-    messages: {
+    MESSAGES: {
       success: 'クリップボードへのコピーに成功しました。'
       error: 'クリップボードへのコピーに失敗しました。'
       warning: 'フォルダが選択されていないか画像がありません。'
@@ -55,7 +55,7 @@ export default
     showMessage:(type) ->
       @$message
         showClose: true
-        message: @messages[type]
+        message: @MESSAGES[type]
         type: type
     requireImg:() ->
       require("@/assets/img/logo.png")
