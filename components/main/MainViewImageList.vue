@@ -8,16 +8,17 @@ el-container.main
     div(style='float: right;')
       el-button(icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー
   el-main
-    ul.itemlist.cf
+    ul.itemlist.cf(v-if="!isDev")
       li(v-for="image in images")
         img(
           :src="image"
           @click="copyToClipboard(image)"
         )
-      //- mock用
-      li(v-for="n in 10")
+    //- mock用
+    ul.itemlist.cf(v-if="isDev")
+      li(v-for="n in 12")
         img(
-          :src="requireImg()"
+          src="~assets/img/logo.png"
         )
 </template>
 
@@ -28,6 +29,7 @@ nativeImage = require('electron').nativeImage
 export default
   name: 'MainViewImageList'
   data: ->
+    isDev: process.env.NODE_ENV == 'development'
     MESSAGES: {
       success: 'クリップボードへのコピーに成功しました。'
       error: 'クリップボードへのコピーに失敗しました。'
@@ -57,13 +59,10 @@ export default
         showClose: true
         message: @MESSAGES[type]
         type: type
-    requireImg:() ->
-      require("@/assets/img/logo.png")
 </script>
 
 <style lang="sass" scoped>
 .itemlist
-  // max-width: 2024px
   filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
   margin: 0 auto
   li
