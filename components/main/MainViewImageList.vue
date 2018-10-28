@@ -23,6 +23,7 @@ el-container.main
 </template>
 
 <script lang="coffee">
+import Notification from '~/components/service/Notification.coffee'
 nativeImage = require('electron').nativeImage
 { clipboard } = require('electron')
 
@@ -30,11 +31,6 @@ export default
   name: 'MainViewImageList'
   data: ->
     isDev: process.env.NODE_ENV == 'development'
-    MESSAGES: {
-      success: 'クリップボードへのコピーに成功しました。'
-      error: 'クリップボードへのコピーに失敗しました。'
-      warning: 'フォルダが選択されていないか画像がありません。'
-    }
   computed:
     images: -> @$store.state.folders.images
     folderName: -> @$store.state.folders.selectFolderName
@@ -44,21 +40,18 @@ export default
     # 画像をランダムで選択
     randomCopy: ->
       if !@$store.getters['folders/isExistsImages']
-        return @showMessage('warning')
+        return @sendNotification('warning')
       @copyToClipboard @$store.getters['folders/getRandomImage']
     # 選択画像をクリップボードにコピー
     copyToClipboard:(path) ->
       image = nativeImage.createFromPath(path)
       if image.isEmpty()
-        return @showMessage('error')
+        return @sendNotification('error')
       clipboard.writeImage(image)
-      @showMessage('success')
+      @sendNotification('success')
     # 画面上部にメッセージを表示
-    showMessage:(type) ->
-      @$message
-        showClose: true
-        message: @MESSAGES[type]
-        type: type
+    sendNotification:(type) ->
+      Notification.notify(@, 'copy_image', type)
 </script>
 
 <style lang="sass" scoped>

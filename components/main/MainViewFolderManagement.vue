@@ -44,6 +44,7 @@ el-container.main
 
 <script lang="coffee">
 import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
+import Notification from '~/components/service/Notification.coffee'
 remote = require('electron').remote
 dialog = remote.dialog
 
@@ -51,10 +52,6 @@ export default
   name: 'MainViewFolderManagement'
   data: ->
     targetFolder: {}
-    MESSAGES: {
-      success: '削除しました。'
-      warning: '削除されませんでした。'
-    }
   computed:
     folders: -> @$store.state.folders.list
     configDialogVisible: -> @$store.state.state.configDialogVisible
@@ -78,14 +75,11 @@ export default
         @deleteFolder(@targetFolder)
         type = 'success'
       @targetFolder = {}
-      @showMessage(type)
+      @sendNotification(type)
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
-    showMessage:(type) ->
-      @$message
-        showClose: true
-        message: @MESSAGES[type]
-        type: type
+    sendNotification:(type) ->
+      Notification.notify(@, 'delete_folder', type)
   components:
     'confirm-dialog': ConfirmDialog
 </script>

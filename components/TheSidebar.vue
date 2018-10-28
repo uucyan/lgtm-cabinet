@@ -1,6 +1,6 @@
 <template lang="pug">
 section
-  el-menu.el-menu-vertical-demo(
+  el-menu(
     default-active='1',
     background-color='#545c64',
     text-color='#fff',
