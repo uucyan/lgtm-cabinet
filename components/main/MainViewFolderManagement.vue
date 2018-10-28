@@ -3,8 +3,9 @@ el-container.main
   el-header
     div(style='float: left;')
       p.postit #フォルダ管理
+    div(style='float: right;')
+      el-button(icon='el-icon-plus' @click="showOpenFolderSelectDialog") 追加
   el-main
-    el-button(@click="showOpenFolderSelectDialog") 追加
     el-table(
       :data='folders',
       style='width: 100%'
@@ -25,10 +26,12 @@ el-container.main
       )
         template(slot-scope='scope')
           el-button(
-            size='mini',
-            type='danger',
+            type="danger"
+            icon="el-icon-delete"
+            size="medium"
+            circle
             @click='showConfirmDialog(scope.row)'
-          ) 削除
+          )
     span(
       slot="footer",
       class="dialog-footer"

@@ -6,7 +6,7 @@ el-container.main
       p.postit(v-else) #フォルダ未選択
       p.postit \#{{ imagesLength }}枚
     div(style='float: right;')
-      el-button(type='primary', round='' icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー
+      el-button(icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー
   el-main
     ul.itemlist.cf
       li(v-for="image in images")

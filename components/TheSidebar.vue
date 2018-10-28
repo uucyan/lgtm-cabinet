@@ -13,7 +13,7 @@ section
         index='1-1',
         @click="select('folderManagement')"
       )
-        i.el-icon-plus
+        i.el-icon-edit-outline
         span フォルダ管理
       el-menu-item(
         index='1-2',
