@@ -1,18 +1,18 @@
 <template lang="pug">
 article
   the-sidebar
-  image-list
+  the-main-view
 </template>
 
 <script lang="coffee">
 import TheSidebar from '~/components/TheSidebar.vue'
-import ImageList from '~/components/ImageList.vue'
+import TheMainView from '~/components/TheMainView.vue'
 
 export default
   name: 'Index'
   components:
     'the-sidebar': TheSidebar
-    'image-list': ImageList
+    'the-main-view': TheMainView
   created: ->
     @$store.dispatch('folders/findAll')
 </script>

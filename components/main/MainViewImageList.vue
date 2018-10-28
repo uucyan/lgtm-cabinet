@@ -1,5 +1,5 @@
 <template lang="pug">
-el-container
+el-container.main
   el-header
     div(style='float: left;')
       p.postit(v-if="folderName") \#{{ folderName }}
@@ -26,7 +26,7 @@ nativeImage = require('electron').nativeImage
 { clipboard } = require('electron')
 
 export default
-  name: 'ImageList'
+  name: 'MainViewImageList'
   data: ->
     messages: {
       success: 'クリップボードへのコピーに成功しました。'
@@ -62,50 +62,6 @@ export default
 </script>
 
 <style lang="sass" scoped>
-section
-  height: 100vh
-  overflow-y: auto
-  padding: 20px
-
-
-//- ul
-//-   // width: auto
-//-   padding: 0
-//-
-//- li
-//-   margin: 10px
-//-   float: left
-//-   list-style: none
-//-
-//- .image
-//-   width: 35vh
-//-   // display: block
-
-.postit
-  margin: 0
-  font-size: 24px
-  position: relative
-  font-weight: normal
-  display: inline-block
-  background-color: #feeaac
-  padding: 10px
-  margin-bottom: 10px
-  border-radius: 2px
-  margin-right: 20px
-
-.postit:before
-  content: ''
-  background-color: #b3b3b3
-  display: block
-  position: absolute
-  left: 50%
-  height: 60%
-  top: 26%
-  z-index: -1
-  width: 46%
-  box-shadow: 0 0 8px 8px #b3b3b3
-  transform: rotate(3deg)
-
 .itemlist
   // max-width: 2024px
   filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))

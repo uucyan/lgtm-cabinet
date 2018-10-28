@@ -19,6 +19,36 @@ body
     box-sizing: border-box
     margin: 0
 
+.main
+  height: 100vh
+  overflow-y: auto
+  padding: 20px
+
+.postit
+  margin: 0
+  font-size: 24px
+  position: relative
+  font-weight: normal
+  display: inline-block
+  background-color: #feeaac
+  padding: 10px
+  margin-bottom: 10px
+  border-radius: 2px
+  margin-right: 20px
+
+.postit:before
+  content: ''
+  background-color: #b3b3b3
+  display: block
+  position: absolute
+  left: 50%
+  height: 60%
+  top: 26%
+  z-index: -1
+  width: 46%
+  box-shadow: 0 0 8px 8px #b3b3b3
+  transform: rotate(3deg)
+
 // .btn, .pointer
 //   cursor: pointer
 //
