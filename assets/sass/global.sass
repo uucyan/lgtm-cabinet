@@ -1,4 +1,11 @@
 @import "./variables/_color.sass"
+// @import url("https://fonts.googleapis.com/earlyaccess/nicomoji.css");
+
+// Google Fonts Japananes
+// https://fonts.google.com/specimen/Kosugi+Maru
+@font-face
+  font-family: 'Kosugi Maru'
+  src: url("~/assets/fonts/KosugiMaru-Regular.ttf")
 
 html
   font-size: 16px
@@ -10,7 +17,9 @@ html
   box-sizing: border-box
 
 body
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  // font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  // font-family: "Nico Moji", "Kosugi Maru"
+  font-family: "Kosugi Maru", sans-serif
 
 *
   box-sizing: border-box
@@ -18,6 +27,60 @@ body
   &:before, &:after
     box-sizing: border-box
     margin: 0
+
+.main
+  height: 100vh
+  overflow-y: auto
+
+.wood-grain-dark-brown
+  background: repeating-radial-gradient(circle at -1000% 0%, rgba(116, 77, 48, 0.7), #573216 7.5%, rgba(116, 77, 48, 0.9) 10%), repeating-radial-gradient(circle at -1000% 0%, #573216, #573216 0.1%, #744d30 0.4%, #744d30 0.5%)
+
+// .wood-grain-brown
+//   background: linear-gradient(90deg, rgba(208, 147, 82, 0.6), rgba(192, 134, 70, 0.6) 60%, rgba(208, 147, 82, 0.6)), repeating-radial-gradient(ellipse at 60% 500%, #c08646, #c08646 0.2%, #d09352 0.6%, #d09352 1%)
+
+// .wood-grain-brown
+//   background: linear-gradient(90deg, rgba(255, 237, 219, 0.6), rgba(236, 218, 201, 0.6) 60%, rgba(255, 237, 219, 0.6)), repeating-radial-gradient(ellipse at 60% 500%, #f7ece0, #f7ece0 0.2%, #fff6ec 0.6%, #fff6ec 1%)
+
+.wood-grain-white
+  background: linear-gradient(90deg, rgba(255, 249, 244, 0.6), rgba(239, 233, 227, 0.6) 60%, rgba(255, 249, 244, 0.6)), repeating-radial-gradient(ellipse at 60% 500%, #f4f0ed, #f4f0ed 0.2%, #fffcf9 0.6%, #fffcf9 1%)
+
+.header-text
+  color: $color-white
+  display: inline-block
+  position: relative
+  margin-right: 20px
+  font-size: 40px
+
+.z-index-0
+  z-index: 0
+
+.z-index-1
+  z-index: 1
+
+.postit
+  margin: 0
+  font-size: 24px
+  position: relative
+  font-weight: normal
+  display: inline-block
+  background-color: #feeaac
+  padding: 10px
+  margin-bottom: 10px
+  border-radius: 2px
+  margin-right: 20px
+
+.postit:before
+  content: ''
+  background-color: #b3b3b3
+  display: block
+  position: absolute
+  left: 50%
+  height: 60%
+  top: 26%
+  z-index: -1
+  width: 46%
+  box-shadow: 0 0 8px 8px #b3b3b3
+  transform: rotate(3deg)
 
 // .btn, .pointer
 //   cursor: pointer
