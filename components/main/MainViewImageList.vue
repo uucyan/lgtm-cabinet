@@ -23,7 +23,6 @@ el-container.main
 </template>
 
 <script lang="coffee">
-import Notification from '~/components/service/Notification.coffee'
 nativeImage = require('electron').nativeImage
 { clipboard } = require('electron')
 
@@ -51,7 +50,7 @@ export default
       @sendNotification('success')
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
-      Notification.notify(@, 'copy_image', type)
+      @$services.notification.notify(@, 'copy_image', type)
 </script>
 
 <style lang="sass" scoped>

@@ -44,7 +44,6 @@ el-container.main
 
 <script lang="coffee">
 import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
-import Notification from '~/components/service/Notification.coffee'
 remote = require('electron').remote
 dialog = remote.dialog
 
@@ -79,7 +78,7 @@ export default
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
     sendNotification:(type) ->
-      Notification.notify(@, 'delete_folder', type)
+      @$services.notification.notify(@, 'delete_folder', type)
   components:
     'confirm-dialog': ConfirmDialog
 </script>

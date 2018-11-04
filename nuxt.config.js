@@ -6,7 +6,12 @@ const prodRouterBase = process.env.NODE_ENV === 'DEV' ? {} : {
 
 module.exports = { ...prodRouterBase,
   mode: 'spa',
-  head: {title: 'lgtm-cabinet'}, // Headers of the page
+  head: {
+    title: 'lgtm-cabinet',
+    meta: [
+      { charset: 'utf-8' }
+    ]
+   }, // Headers of the page
   loading: false, // Disable default loading bar
   generate: {
     dir: 'dist/electron'
@@ -35,6 +40,7 @@ module.exports = { ...prodRouterBase,
   plugins: [
     '~plugins/element-ui',
     '~plugins/datastore',
+    '~plugins/service.coffee',
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
