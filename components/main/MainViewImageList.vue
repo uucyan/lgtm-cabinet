@@ -1,21 +1,26 @@
 <template lang="pug">
 el-container.main
-  el-header
+  el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
     div(style='float: left;')
-      p.postit(v-if="folderName") \#{{ folderName }}
-      p.postit(v-else) #フォルダ未選択
-      p.postit \#{{ imagesLength }}枚
+      p.header-text(v-if="folderName") \#{{ folderName }}
+      p.header-text(v-else) #フォルダ未選択
+      p.header-text \#{{ imagesLength }}枚
     div(style='float: right;')
-      el-button(icon='el-icon-printer' @click="randomCopy()" v-bind:disabled='!isExistsImages') ランダムコピー
-  el-main
-    ul.itemlist.cf(v-if="!isDev")
+      el-button(
+        icon='el-icon-printer'
+        @click="randomCopy()"
+        v-bind:disabled='!isExistsImages'
+        style='background: transparent; color: #ffffff;'
+      ) ランダムコピー
+  el-main.wood-grain-white
+    ul.itemlist.z-index-0(v-if="!isDev")
       li(v-for="image in images")
         img(
           :src="image"
           @click="copyToClipboard(image)"
         )
     //- mock用
-    ul.itemlist.cf(v-if="isDev")
+    ul.itemlist.z-index-0(v-if="isDev")
       li(v-for="n in 12")
         img(
           src="~assets/img/logo.png"

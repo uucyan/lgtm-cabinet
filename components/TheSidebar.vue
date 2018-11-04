@@ -1,14 +1,15 @@
 <template lang="pug">
-section
-  el-menu(
+section.wood-grain-dark-brown
+  el-menu.z-index-1(
     default-active='1',
-    background-color='#545c64',
+    background-color='transparent',
     text-color='#fff',
     active-text-color='#ffd04b'
+    style='border-right: none'
   )
     el-submenu(index='1')
       template(slot='title')
-        span フォルダ管理・設定
+        span 管理・設定
       el-menu-item(
         index='1-1',
         @click="select('folderManagement')"
@@ -21,79 +22,38 @@ section
       )
         i.el-icon-setting
         span 設定
-    el-menu-item(
-      v-for="(folder, index) in folders",
-      :key="folder._id",
-      :index="index + '2'"
-      @click="select('folder', folder)"
-    )
-      i.el-icon-picture-outline
-      span {{ folder.name }}
-  //- folder-management-dialog(
-  //-   :folderManagementDialogVisible="folderManagementDialogVisible",
-  //-   @close="closeDialog"
-  //- )
-  //- config-dialog(
-  //-   :configDialogVisible="configDialogVisible",
-  //-   @close="closeDialog"
-  //- )
+    el-submenu(index='2')
+      template(slot='title')
+        span フォルダ
+      el-menu-item(
+        v-for="(folder, index) in folders",
+        :key="folder._id",
+        :index="'2-' + index"
+        @click="select('folder', folder)"
+      )
+        i.el-icon-picture-outline
+        span {{ folder.name }}
 </template>
 
 <script lang="coffee">
-# import FolderManagementDialog from '~/components/FolderManagementDialog.vue'
-# import ConfigDialog from '~/components/ConfigDialog.vue'
-
 export default
   name: 'TheSidebar'
-  # data: ->
-    # folderManagementDialogVisible: false
-    # configDialogVisible: false
-    # selectMenuItemId: ''
   computed:
     folders: -> @$store.state.folders.list
   methods:
-    # openFolderManagementDialog:(id) ->
-    #   @folderManagementDialogVisible = true
-    #   @selectMenuItemId = id
-    #   @changeSelectMenuItemStyle('open')
-    # openConfigDialog:(id) ->
-    #   @configDialogVisible = true
-    #   @selectMenuItemId = id
-    #   @changeSelectMenuItemStyle('open')
-    # closeDialog: ->
-    #   @folderManagementDialogVisible = false
-    #   @configDialogVisible = false
-    #   @changeSelectMenuItemStyle('close')
-    # changeSelectMenuItemStyle:(action) ->
-    #   element = document.getElementById @selectMenuItemId
-    #   if !element?
-    #     return
-    #   if action == 'open'
-    #     element.style.color = 'rgb(255, 208, 75)'
-    #     element.className = "el-menu-item is-active"
-    #   else
-    #     element.style.color = 'rgb(255, 255, 255)'
-    #     element.className = "el-menu-item"
     select:(menuName, folder = null) ->
       @$store.commit('state/selectMenu', menuName)
       if folder?
         @$store.dispatch('folders/getImagePaths', folder)
         @$store.commit('folders/setSelectFolderName', folder.name)
-  # components:
-  #   'folder-management-dialog': FolderManagementDialog
-  #   'config-dialog': ConfigDialog
 </script>
 
 <style lang="sass" scoped>
-// .menu-area
-//   height: 100vh
-//   width: 250px
-//   background-color: #545c64
-
 ul
   height: 100vh
   width: 250px
   overflow-y: auto
+  box-shadow: 9px 5px 25px 8px rgba(0, 0, 0, 0.3)
 
 li
   overflow-x: auto

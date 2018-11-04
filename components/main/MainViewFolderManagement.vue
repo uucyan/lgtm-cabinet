@@ -1,15 +1,15 @@
 <template lang="pug">
 el-container.main
-  el-header
+  el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
     div(style='float: left;')
-      p.postit #フォルダ管理
+      p.header-text #フォルダ管理
     div(style='float: right;')
-      el-button(icon='el-icon-plus' @click="showOpenFolderSelectDialog") 追加
-  el-main
+      el-button(icon='el-icon-plus' @click="showOpenFolderSelectDialog" style='background: transparent; color: #ffffff;') 追加
+  el-main.wood-grain-white
     el-table(
       :data='folders',
       style='width: 100%'
-    )
+    ).z-index-0
       el-table-column(
         prop='name',
         label='フォルダ名',
