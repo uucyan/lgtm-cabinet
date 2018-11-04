@@ -38,8 +38,8 @@ module.exports = { ...prodRouterBase,
     vendor: ['element-ui']
   },
   plugins: [
-    '~plugins/element-ui',
-    '~plugins/datastore',
+    '~plugins/element-ui.coffee',
+    '~plugins/datastore.coffee',
     '~plugins/service.coffee',
   ],
   dev: process.env.NODE_ENV === 'DEV',
