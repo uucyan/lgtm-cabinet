@@ -1,10 +1,22 @@
 <template lang="pug">
 el-container.main
   el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
-    div(style='float: left;')
-      p.header-text #フォルダ管理
-    div(style='float: right;')
-      el-button(icon='el-icon-plus' @click="showOpenFolderSelectDialog" style='background: transparent; color: #ffffff;') 追加
+    div.header-element-left
+      p.header-title.overflow-x-auto フォルダ管理
+    div.header-element-right
+      el-button(
+        v-if="windowWidthSize > 700"
+        icon='el-icon-plus'
+        @click="showOpenFolderSelectDialog"
+        style='background: transparent; color: #ffffff;'
+      ) 追加
+      el-button(
+        v-else
+        circle
+        icon='el-icon-plus'
+        @click="showOpenFolderSelectDialog"
+        style='background: transparent; color: #ffffff;'
+      )
   el-main.wood-grain-white
     el-table(
       :data='folders',
@@ -51,6 +63,7 @@ export default
   name: 'MainViewFolderManagement'
   data: ->
     targetFolder: {}
+    windowWidthSize: window.outerWidth
   computed:
     folders: -> @$store.state.folders.list
     configDialogVisible: -> @$store.state.state.configDialogVisible
@@ -79,6 +92,14 @@ export default
       @$store.dispatch('folders/delete', folder)
     sendNotification:(type) ->
       @$services.notification.notify(@, 'delete_folder', type)
+    # ウィンドウのリサイズ時に横幅を取得
+    handleResize: -> @windowWidthSize = window.outerWidth
+  created: ->
+    # 画面のリサイズ時にイベントを発火させるためのリスナーを登録
+    window.addEventListener('resize', @handleResize, false)
+  beforeDestroy: ->
+    # 登録したイベントリスナーを削除
+    window.removeEventListener('resize', @handleResize)
   components:
     'confirm-dialog': ConfirmDialog
 </script>

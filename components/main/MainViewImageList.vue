@@ -1,17 +1,24 @@
 <template lang="pug">
 el-container.main
   el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
-    div(style='float: left;')
-      p.header-text(v-if="folderName") \#{{ folderName }}
-      p.header-text(v-else) #フォルダ未選択
-      p.header-text \#{{ imagesLength }}枚
-    div(style='float: right;')
+    div.header-element-left
+      p.header-title.overflow-x-auto {{ folderName }}
+    div.header-element-right
       el-button(
+        v-if="windowWidthSize > 1000"
         icon='el-icon-printer'
         @click="randomCopy()"
         v-bind:disabled='!isExistsImages'
         style='background: transparent; color: #ffffff;'
       ) ランダムコピー
+      el-button(
+        v-else
+        circle
+        icon='el-icon-printer'
+        @click="randomCopy()"
+        v-bind:disabled='!isExistsImages'
+        style='background: transparent; color: #ffffff;'
+      )
   el-main.wood-grain-white
     ul.itemlist.z-index-0(v-if="!isDev")
       li(v-for="image in images")
@@ -35,10 +42,10 @@ export default
   name: 'MainViewImageList'
   data: ->
     isDev: process.env.NODE_ENV == 'development'
+    windowWidthSize: window.outerWidth
   computed:
     images: -> @$store.state.folders.images
     folderName: -> @$store.state.folders.selectFolderName
-    imagesLength: -> @$store.getters['folders/getImagesLength']
     isExistsImages: -> @$store.getters['folders/isExistsImages']
   methods:
     # 画像をランダムで選択
@@ -56,9 +63,20 @@ export default
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
       @$services.notification.notify(@, 'copy_image', type)
+    # ウィンドウのリサイズ時に横幅を取得
+    handleResize: -> @windowWidthSize = window.outerWidth
+  created: ->
+    # 画面のリサイズ時にイベントを発火させるためのリスナーを登録
+    window.addEventListener('resize', @handleResize, false)
+  beforeDestroy: ->
+    # 登録したイベントリスナーを削除
+    window.removeEventListener('resize', @handleResize)
 </script>
 
 <style lang="sass" scoped>
+ul
+  padding: 0px
+
 .itemlist
   filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
   margin: 0 auto
