@@ -44,18 +44,30 @@ body
 .wood-grain-white
   background: linear-gradient(90deg, rgba(255, 249, 244, 0.6), rgba(239, 233, 227, 0.6) 60%, rgba(255, 249, 244, 0.6)), repeating-radial-gradient(ellipse at 60% 500%, #f4f0ed, #f4f0ed 0.2%, #fffcf9 0.6%, #fffcf9 1%)
 
-.header-text
+.header-title
   color: $color-white
-  display: inline-block
+  white-space: nowrap
   position: relative
   margin-right: 20px
   font-size: 40px
+
+.header-element-left
+  float: left; width: 80%;
+
+.header-element-right
+  float: right; text-align: right; width: 20%;
 
 .z-index-0
   z-index: 0
 
 .z-index-1
   z-index: 1
+
+.overflow-x-auto
+  overflow-x: auto
+
+.overflow-x-auto::-webkit-scrollbar
+  display: none
 
 .postit
   margin: 0

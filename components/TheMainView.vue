@@ -3,6 +3,7 @@ el-container
   main-view-folder-management(v-show="selectedMenu == 'folderManagement'")
   main-view-config(v-show="selectedMenu == 'config'")
   main-view-image-list(v-show="selectedMenu == 'folder'")
+  el-main.wood-grain-white.z-index-0(v-show="selectedMenu == ''")
 </template>
 
 <script lang="coffee">
