@@ -55,15 +55,17 @@ el-container.main
 </template>
 
 <script lang="coffee">
+import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
 import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
+
 remote = require('electron').remote
 dialog = remote.dialog
 
 export default
   name: 'MainViewFolderManagement'
+  mixins: [ handleResizeMixin ]
   data: ->
     targetFolder: {}
-    windowWidthSize: window.outerWidth
   computed:
     folders: -> @$store.state.folders.list
     configDialogVisible: -> @$store.state.state.configDialogVisible
@@ -92,14 +94,6 @@ export default
       @$store.dispatch('folders/delete', folder)
     sendNotification:(type) ->
       @$services.notification.notify(@, 'delete_folder', type)
-    # ウィンドウのリサイズ時に横幅を取得
-    handleResize: -> @windowWidthSize = window.outerWidth
-  created: ->
-    # 画面のリサイズ時にイベントを発火させるためのリスナーを登録
-    window.addEventListener('resize', @handleResize, false)
-  beforeDestroy: ->
-    # 登録したイベントリスナーを削除
-    window.removeEventListener('resize', @handleResize)
   components:
     'confirm-dialog': ConfirmDialog
 </script>
