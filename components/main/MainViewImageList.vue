@@ -35,14 +35,16 @@ el-container.main
 </template>
 
 <script lang="coffee">
+import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
+
 nativeImage = require('electron').nativeImage
 { clipboard } = require('electron')
 
 export default
   name: 'MainViewImageList'
+  mixins: [ handleResizeMixin ]
   data: ->
     isDev: process.env.NODE_ENV == 'development'
-    windowWidthSize: window.outerWidth
   computed:
     images: -> @$store.state.folders.images
     folderName: -> @$store.state.folders.selectFolderName
@@ -63,14 +65,6 @@ export default
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
       @$services.notification.notify(@, 'copy_image', type)
-    # ウィンドウのリサイズ時に横幅を取得
-    handleResize: -> @windowWidthSize = window.outerWidth
-  created: ->
-    # 画面のリサイズ時にイベントを発火させるためのリスナーを登録
-    window.addEventListener('resize', @handleResize, false)
-  beforeDestroy: ->
-    # 登録したイベントリスナーを削除
-    window.removeEventListener('resize', @handleResize)
 </script>
 
 <style lang="sass" scoped>
