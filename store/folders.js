@@ -13,9 +13,6 @@ export const getters = {
   isExistsImages(state) {
     return state.images.length != 0
   },
-  getRandomImage(state) {
-    return state.images[Math.floor(Math.random() * state.images.length)]
-  },
   getImagesLength(state) {
     return state.images.length
   },
