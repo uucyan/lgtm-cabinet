@@ -52,9 +52,9 @@ export default
   methods:
     # 画像をランダムで選択
     randomCopy: ->
-      if !@$store.getters['folders/isExistsImages']
+      if !@isExistsImages
         return @sendNotification('warning')
-      @copyToClipboard @$store.getters['folders/getRandomImage']
+      @copyToClipboard @images[Math.floor(Math.random() * Math.floor(@images.length))]
     # 選択画像をクリップボードにコピー
     copyToClipboard:(path) ->
       image = nativeImage.createFromPath(path)
