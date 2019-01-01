@@ -7,7 +7,7 @@ const prodRouterBase = process.env.NODE_ENV === 'DEV' ? {} : {
 module.exports = { ...prodRouterBase,
   mode: 'spa',
   head: {
-    title: 'lgtm-cabinet',
+    title: 'LGTM Cabinet',
     meta: [
       { charset: 'utf-8' }
     ]
