@@ -40,7 +40,7 @@ const globalShortcut = electron.globalShortcut
 
 const newWin = () => {
   win = new electron.BrowserWindow({
-    icon: path.join(__dirname, 'static/icon.png'),
+    icon: path.join(__dirname, 'static/icon.icns'),
     width: 1500,
     height: 1000,
     // backgroundColor: '#573216'
