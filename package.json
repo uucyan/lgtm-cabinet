@@ -1,12 +1,14 @@
 {
   "name": "lgtm-cabinet",
   "version": "1.0.0",
-  "description": "Nuxt + Electron",
+  "description": "LGTM 画像を管理できて簡単にコピーできるアプリ。",
   "author": "uucyan <uuunouucyan@gmail.com>",
   "private": true,
   "main": "./dist/electron/main.js",
   "build": {
     "appId": "com.uucyan.app",
+    "productName": "LGTM Cabinet",
+    "copyright": "Copyright © 2019 Uucyan",
     "directories": {
       "buildResources": "static"
     },
