@@ -10,6 +10,35 @@ el-container.main
     )
     div.title
       p LGTM Cabinet
+    div.button-area
+      el-button(
+        v-if="windowWidthSize > 675"
+        icon='el-icon-info'
+        class="button"
+        round
+      ) 使い方
+      el-button(
+        v-else
+        icon='el-icon-info'
+        class="button-mini"
+        circle
+      )
+      a(href="https://github.com/uucyan/lgtm-cabinet" target="_blank")
+        el-button(
+          v-if="windowWidthSize > 675"
+          class="button"
+          style="margin-left: 10%"
+          round
+        )
+          img(src="~assets/img/github.png" class="github-icon")
+          span.github-text GitHub
+        el-button(
+          v-else
+          class="button-mini"
+          style="margin-left: 20%"
+          circle
+        )
+          img(src="~assets/img/github.png" class="github-icon")
 </template>
 
 <script lang="coffee">
@@ -34,4 +63,33 @@ export default
   font-size: 80px
   color: $color-white
   filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+
+.button-area
+  margin-top: 50px
+
+.button
+  background: #744d30
+  color: #fff
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+  font-size: 20px
+  width: 150px
+  height: 45px
+
+.button-mini
+  background: #744d30
+  color: #fff
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+  width: 60px
+  height: 60px
+
+.github-icon
+  display: inline-block
+  width: 20px
+  height: 20px
+  vertical-align: middle
+  margin-bottom: 4px
+
+.github-text
+  display: inline
+  margin-left: 5px
 </style>
