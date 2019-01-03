@@ -4,10 +4,7 @@ el-container.main
     div.header-element-left
       p.header-title.overflow-x-auto
   el-main.wood-grain-white.z-index-0.main-top
-    img(
-      src="~assets/img/logo.png"
-      class="logo"
-    )
+    div.logo
     div.title
       p LGTM Cabinet
     div.button-area
@@ -32,7 +29,7 @@ el-container.main
           style="margin-left: 10%"
           round
         )
-          img(src="~assets/img/github.png" class="github-icon")
+          div.github-icon
           span.github-text GitHub
         el-button(
           v-else
@@ -40,7 +37,7 @@ el-container.main
           style="margin-left: 20%"
           circle
         )
-          img(src="~assets/img/github.png" class="github-icon")
+          div.github-icon
   description-dialog
 </template>
 
@@ -60,11 +57,6 @@ export default
 <style lang="sass" scoped>
 .main-top
   text-align: center
-
-.logo
-  width: 256px
-  height: 256px
-  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
 
 .title
   font-family: 'Fredoka One', sans-serif
@@ -90,13 +82,6 @@ export default
   font-size: 20px
   width: 60px
   height: 60px
-
-.github-icon
-  display: inline-block
-  width: 20px
-  height: 20px
-  vertical-align: middle
-  margin-bottom: 4px
 
 .github-text
   display: inline
