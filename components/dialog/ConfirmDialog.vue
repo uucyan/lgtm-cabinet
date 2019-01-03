@@ -5,24 +5,25 @@ el-dialog(
   :visible.sync="confirmDialogVisible",
   :before-close="close"
 )
-  span(v-if="folder") {{ folder.name }} フォルダを削除しますか？
-  br
-  span ※実際のフォルダは削除されません。
+  el-main(style="height: 150px")
+    span(v-if="folder") {{ folder.name }} フォルダを削除しますか？
+    br
+    span ※実際のフォルダは削除されません。
   span(
     slot="footer",
     class="dialog-footer"
   )
-    el-button(@click="close") いいえ
-    el-button(
-      type="primary",
-      @click="close(true)"
-    ) はい
+    el-button(@click="close" style='background: transparent; color: #ffffff;') いいえ
+    el-button(@click="close(true)" style="background: #ffffff; color: #744d30;") はい
 </template>
 
 <script lang="coffee">
+import ChangeStyleMixin from "~/components/dialog/ChangeStyleMixin.coffee"
+
 export default
   props:
     folder: Object
+  mixins: [ ChangeStyleMixin ]
   computed:
     confirmDialogVisible: -> @$store.state.state.confirmDialogVisible
   methods:

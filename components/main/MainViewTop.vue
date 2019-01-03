@@ -15,12 +15,14 @@ el-container.main
         v-if="windowWidthSize > 675"
         icon='el-icon-info'
         class="button"
+        @click="showDescriptionDialog()"
         round
       ) 使い方
       el-button(
         v-else
         icon='el-icon-info'
         class="button-mini"
+        @click="showDescriptionDialog()"
         circle
       )
       a(href="https://github.com/uucyan/lgtm-cabinet" target="_blank")
@@ -39,14 +41,20 @@ el-container.main
           circle
         )
           img(src="~assets/img/github.png" class="github-icon")
+  description-dialog
 </template>
 
 <script lang="coffee">
-import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
+import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
+import DescriptionDialog from '~/components/dialog/DescriptionDialog.vue'
 
 export default
   name: 'MainViewFolderTop'
-  mixins: [ handleResizeMixin ]
+  mixins: [ HandleResizeMixin ]
+  methods:
+    showDescriptionDialog:() -> @$store.commit('state/descriptionDialogVisible', true)
+  components:
+    'description-dialog': DescriptionDialog
 </script>
 
 <style lang="sass" scoped>
@@ -79,6 +87,7 @@ export default
   background: #744d30
   color: #fff
   filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+  font-size: 20px
   width: 60px
   height: 60px
 

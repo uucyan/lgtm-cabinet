@@ -58,6 +58,27 @@ body
 .header-element-left
   float: left; width: 80%;
 
+.my-dialog-header
+  padding: 15px 15px 15px;
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+
+.my-dialog-footer
+  padding: 15px 15px 15px;
+  text-align: right;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  filter: drop-shadow(10px -10px 10px rgba(0,0,0,0.5))
+
+.my-dialog-title
+  line-height: 24px
+  font-size: 25px
+  color: $color-white
+
+.my-dialog-body
+  // padding: 30px 20px
+  color: #606266
+  // font-size: 14px
+
 .header-element-right
   float: right; text-align: right; width: 20%;
 
@@ -73,6 +94,7 @@ body
 .overflow-x-auto::-webkit-scrollbar
   display: none
 
+// 使ってない
 .postit
   margin: 0
   font-size: 24px
@@ -85,6 +107,7 @@ body
   border-radius: 2px
   margin-right: 20px
 
+  // 使ってない
 .postit:before
   content: ''
   background-color: #b3b3b3
