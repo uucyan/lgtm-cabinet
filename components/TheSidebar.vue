@@ -7,28 +7,32 @@ section.wood-grain-dark-brown
     active-text-color='#ffd04b'
     style='border-right: none'
   )
-    el-submenu(index='1')
+    el-menu-item(
+        index='1',
+        @click="select('')"
+      ) LGTM Cabinet
+    el-submenu(index='2')
       template(slot='title')
         span 管理・設定
       el-menu-item(
-        index='1-1',
+        index='2-1',
         @click="select('folderManagement')"
       )
         i.el-icon-edit-outline
         span フォルダ管理
       el-menu-item(
-        index='1-2',
+        index='2-2',
         @click="select('config')"
       )
         i.el-icon-setting
         span 設定
-    el-submenu(index='2')
+    el-submenu(index='3')
       template(slot='title')
         span フォルダ
       el-menu-item(
         v-for="(folder, index) in folders",
         :key="folder._id",
-        :index="'2-' + index"
+        :index="'3-' + index"
         @click="select('folder', folder)"
       )
         i.el-icon-picture-outline

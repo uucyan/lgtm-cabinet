@@ -14,7 +14,7 @@ el-container.main
         class="button"
         @click="showDescriptionDialog()"
         round
-      ) 使い方
+      ) はじめに
       el-button(
         v-else
         icon='el-icon-info'
