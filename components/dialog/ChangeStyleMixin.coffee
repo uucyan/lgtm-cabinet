@@ -4,10 +4,12 @@ export default
   watch:
     # ダイアログが表示された 0.1 秒後にスタイルを変更する
     # body の DOM が生成され終わるのを待つため
-    descriptionDialogVisible:() -> setTimeout(@setDialogStyles, 100)
-    confirmDialogVisible:() -> setTimeout(@setDialogStyles, 100)
+    descriptionDialogVisible: -> setTimeout(@setDialogStyles, 100)
+    confirmDialogVisible: -> setTimeout(@setDialogStyles, 100)
+    releaseDialogVisible: -> setTimeout(@setDialogStyles, 100)
   methods:
-    setDialogStyles:() ->
+    # ダイアログのスタイル
+    setDialogStyles: ->
       # ヘッダー全体のスタイル
       document.querySelectorAll('.el-dialog__header').forEach (element) -> element.className = 'my-dialog-header wood-grain-dark-brown'
       # ヘッダーのタイトルテキストのスタイル

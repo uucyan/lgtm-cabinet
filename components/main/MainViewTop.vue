@@ -9,7 +9,7 @@ el-container.main
       p LGTM Cabinet
     div.button-area
       el-button(
-        v-if="windowWidthSize > 675"
+        v-if="windowWidthSize > 860"
         icon='el-icon-info'
         class="button"
         @click="showDescriptionDialog()"
@@ -22,36 +22,52 @@ el-container.main
         @click="showDescriptionDialog()"
         circle
       )
+      el-button.margin-left-10(
+        v-if="windowWidthSize > 860"
+        icon='el-icon-document'
+        class="button"
+        @click="showReleaseDialog()"
+        round
+      ) リリース
+      el-button.margin-left-20(
+        v-else
+        icon='el-icon-document'
+        class="button-mini"
+        @click="showReleaseDialog()"
+        circle
+      )
       a(href="https://github.com/uucyan/lgtm-cabinet" target="_blank")
-        el-button(
-          v-if="windowWidthSize > 675"
+        el-button.margin-left-10(
+          v-if="windowWidthSize > 860"
           class="button"
-          style="margin-left: 10%"
           round
         )
           div.github-icon
           span.github-text GitHub
-        el-button(
+        el-button.margin-left-20(
           v-else
           class="button-mini"
-          style="margin-left: 20%"
           circle
         )
           div.github-icon
   description-dialog
+  release-Dialog
 </template>
 
 <script lang="coffee">
 import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
 import DescriptionDialog from '~/components/dialog/DescriptionDialog.vue'
+import ReleaseDialog from '~/components/dialog/ReleaseDialog.vue'
 
 export default
   name: 'MainViewFolderTop'
   mixins: [ HandleResizeMixin ]
   methods:
-    showDescriptionDialog:() -> @$store.commit('state/descriptionDialogVisible', true)
+    showDescriptionDialog: -> @$store.commit('state/descriptionDialogVisible', true)
+    showReleaseDialog: -> @$store.commit('state/releaseDialogVisible', true)
   components:
     'description-dialog': DescriptionDialog
+    'release-Dialog': ReleaseDialog
 </script>
 
 <style lang="sass" scoped>
@@ -86,4 +102,10 @@ export default
 .github-text
   display: inline
   margin-left: 5px
+
+.margin-left-10
+  margin-left: 10%
+
+.margin-left-20
+  margin-left: 20%
 </style>

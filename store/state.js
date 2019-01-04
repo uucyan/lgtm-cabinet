@@ -5,8 +5,10 @@ export const state = () => ({
   selectedMenu: '',
   // 確認ダイアログの表示フラグ
   confirmDialogVisible: false,
-  // 使い方説明ダイアログに表示フラグ
-  descriptionDialogVisible: false
+  // はじめにダイアログの表示フラグ
+  descriptionDialogVisible: false,
+  // リリースダイアログの表示フラグ
+  releaseDialogVisible: false,
 })
 
 export const getters = {
@@ -22,5 +24,8 @@ export const mutations = {
   },
   descriptionDialogVisible(state, visible) {
     state.descriptionDialogVisible = visible
+  },
+  releaseDialogVisible(state, visible) {
+    state.releaseDialogVisible = visible
   },
 }
