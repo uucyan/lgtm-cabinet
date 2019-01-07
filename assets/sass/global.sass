@@ -7,6 +7,10 @@
   font-family: 'Kosugi Maru'
   src: url("~/assets/fonts/KosugiMaru-Regular.ttf")
 
+@font-face
+  font-family: 'Fredoka One'
+  src: url("~/assets/fonts/FredokaOne-Regular.ttf")
+
 html
   font-size: 16px
   word-spacing: 1px
@@ -44,6 +48,23 @@ body
 .wood-grain-white
   background: linear-gradient(90deg, rgba(255, 249, 244, 0.6), rgba(239, 233, 227, 0.6) 60%, rgba(255, 249, 244, 0.6)), repeating-radial-gradient(ellipse at 60% 500%, #f4f0ed, #f4f0ed 0.2%, #fffcf9 0.6%, #fffcf9 1%)
 
+.logo
+  display: block
+  margin-left: auto
+  margin-right: auto
+  width: 256px
+  height: 256px
+  background: url("~/assets/img/logo.png") center center / cover
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+
+.github-icon
+  display: inline-block
+  width: 20px
+  height: 20px
+  vertical-align: middle
+  margin-bottom: 4px
+  background: url("~/assets/img/github.png") center center / cover
+
 .header-title
   color: $color-white
   white-space: nowrap
@@ -53,6 +74,27 @@ body
 
 .header-element-left
   float: left; width: 80%;
+
+.my-dialog-header
+  padding: 15px 15px 15px;
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+
+.my-dialog-footer
+  padding: 15px 15px 15px;
+  text-align: right;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  filter: drop-shadow(10px -10px 10px rgba(0,0,0,0.5))
+
+.my-dialog-title
+  line-height: 24px
+  font-size: 25px
+  color: $color-white
+
+.my-dialog-body
+  // padding: 30px 20px
+  color: #606266
+  // font-size: 14px
 
 .header-element-right
   float: right; text-align: right; width: 20%;
@@ -69,6 +111,7 @@ body
 .overflow-x-auto::-webkit-scrollbar
   display: none
 
+// 使ってない
 .postit
   margin: 0
   font-size: 24px
@@ -81,6 +124,7 @@ body
   border-radius: 2px
   margin-right: 20px
 
+  // 使ってない
 .postit:before
   content: ''
   background-color: #b3b3b3

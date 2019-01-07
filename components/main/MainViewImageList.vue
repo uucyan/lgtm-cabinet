@@ -35,14 +35,14 @@ el-container.main
 </template>
 
 <script lang="coffee">
-import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
+import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
 
 nativeImage = require('electron').nativeImage
 { clipboard } = require('electron')
 
 export default
   name: 'MainViewImageList'
-  mixins: [ handleResizeMixin ]
+  mixins: [ HandleResizeMixin ]
   data: ->
     isDev: process.env.NODE_ENV == 'development'
   computed:

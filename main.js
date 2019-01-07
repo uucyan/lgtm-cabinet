@@ -93,14 +93,14 @@ const newWin = () => {
     {
       label: '表示',
       submenu: [
-        {
-          label: '最読み込み',
-          accelerator: 'CmdOrCtrl+R',
-          click: function (item, focusedWindow) {
-            if (focusedWindow)
-              focusedWindow.reload();
-          }
-        },
+        // {
+        //   label: '最読み込み',
+        //   accelerator: 'CmdOrCtrl+R',
+        //   click: function (item, focusedWindow) {
+        //     if (focusedWindow)
+        //       focusedWindow.reload();
+        //   }
+        // },
         {
           label: 'フルスクリーン',
           accelerator: (function () {

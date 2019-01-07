@@ -7,11 +7,11 @@ el-container.main
 </template>
 
 <script lang="coffee">
-import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
+import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
 
 export default
   name: 'MainViewFolderConfig'
-  mixins: [ handleResizeMixin ]
+  mixins: [ HandleResizeMixin ]
 </script>
 
 <style lang="sass" scoped>

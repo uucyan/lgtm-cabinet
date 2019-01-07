@@ -55,7 +55,7 @@ el-container.main
 </template>
 
 <script lang="coffee">
-import handleResizeMixin from "~/components/main/handleResizeMixin.coffee"
+import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
 import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
 
 remote = require('electron').remote
@@ -63,7 +63,7 @@ dialog = remote.dialog
 
 export default
   name: 'MainViewFolderManagement'
-  mixins: [ handleResizeMixin ]
+  mixins: [ HandleResizeMixin ]
   data: ->
     targetFolder: {}
   computed:
