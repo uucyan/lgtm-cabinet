@@ -5,7 +5,7 @@ el-dialog(
   :visible.sync="descriptionDialogVisible",
   :before-close="close"
 )
-  el-main(style="height: 400px")
+  el-main(style="height: 500px")
     h2 LGTM Cabinet とは
       i.el-icon-question
     p 自分が保存している画像を簡単に LGTM 画像として利用できるようにするための画像管理アプリです。
