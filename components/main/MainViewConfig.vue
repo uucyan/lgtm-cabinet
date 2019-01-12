@@ -25,7 +25,7 @@ el-container.main
       label サイドバーに「LGTM Cabinet」を表示する
       el-switch.input(v-model='sidebarShowTitle', @change="updateConfig('sidebarShowTitle', sidebarShowTitle)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.form-item
-      label サイドバーのフォルダタブを常に展開した状態にする
+      label アプリの起動時にサイドバーのフォルダタブを展開した状態にする
       el-switch.input(v-model='sidebarFileTabOpen', @change="updateConfig('sidebarFileTabOpen', sidebarFileTabOpen)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 

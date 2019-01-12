@@ -6,6 +6,7 @@ section.wood-grain-dark-brown
     text-color='#fff',
     active-text-color='#ffd04b'
     style='border-right: none'
+    ref='menu'
   )
     el-menu-item(
         v-if="'sidebarShowTitle' in config && config.sidebarShowTitle"
@@ -46,12 +47,16 @@ export default
   computed:
     folders: -> @$store.state.folders.list
     config: -> @$store.state.config.config
+  mounted: -> setTimeout(@sidebarFileTabOpen, 500)
   methods:
     select:(menuName, folder = null) ->
       @$store.commit('state/selectMenu', menuName)
       if folder?
         @$store.dispatch('folders/getImagePaths', folder)
         @$store.commit('folders/setSelectFolderName', folder.name)
+    sidebarFileTabOpen: ->
+      if @config.sidebarFileTabOpen? && @config.sidebarFileTabOpen
+        @$refs.menu.open 3
 </script>
 
 <style lang="sass" scoped>
