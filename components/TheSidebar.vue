@@ -8,6 +8,7 @@ section.wood-grain-dark-brown
     style='border-right: none'
   )
     el-menu-item(
+        v-if="'sidebarShowTitle' in config && config.sidebarShowTitle"
         index='1',
         @click="select('')"
       ) LGTM Cabinet
@@ -44,6 +45,7 @@ export default
   name: 'TheSidebar'
   computed:
     folders: -> @$store.state.folders.list
+    config: -> @$store.state.config.config
   methods:
     select:(menuName, folder = null) ->
       @$store.commit('state/selectMenu', menuName)
