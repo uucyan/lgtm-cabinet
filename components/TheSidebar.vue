@@ -52,7 +52,7 @@ export default
     select:(menuName, folder = null) ->
       @$store.commit('state/selectMenu', menuName)
       if folder?
-        @$store.dispatch('folders/getImagePaths', folder)
+        @$store.dispatch('folders/getImagePaths', {folder: folder, imageListShowGifImage: @config.imageListShowGifImage})
         @$store.commit('folders/setSelectFolderName', folder.name)
     sidebarFileTabOpen: ->
       if @config.sidebarFileTabOpen? && @config.sidebarFileTabOpen

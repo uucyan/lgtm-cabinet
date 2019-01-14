@@ -60,12 +60,16 @@ export const actions = {
     dispatch('findAll')
   },
   // 選択したフォルダの画像一覧を取得
-  getImagePaths({ commit }, folder) {
+  getImagePaths({ commit }, params) {
+    const folder = params.folder
+    const imageListShowGifImage = params.imageListShowGifImage
+    const regexp = imageListShowGifImage ? /^image\/(jpeg|png|gif)/ : /^image\/(jpeg|png)/
+
     fs.readdir(folder.path, (err, fileNames) => {
       let images = []
       for (let filename of fileNames) {
         const type = mime.lookup(path.extname(filename))
-        if (type && /^image\//.test(type)) {
+        if (type && regexp.test(type)) {
           images.push(folder.path + '/' + filename)
         }
       }
