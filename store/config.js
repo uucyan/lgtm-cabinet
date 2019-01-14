@@ -9,7 +9,7 @@ export const state = () => ({
     imageListShowGifImage: false,
     imageListKeepScrollPosition: false,
     // 通知
-    notificationPosition: 'bottom-left',
+    notificationPosition: 'bottom-right',
   },
   config: {}
 })

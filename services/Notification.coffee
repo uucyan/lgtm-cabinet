@@ -24,10 +24,10 @@ export default class Notification
         title: '警告'
         message: 'フォルダを削除しませんでした。'
 
-  notify: (vue, category, type) ->
+  notify: (vue, category, type, position) ->
     vue.$notify
       type: type
       showClose: true
-      position: 'bottom-right'
+      position: position
       title: NOTIFICATION_MESSAGES[category][type].title
       message: NOTIFICATION_MESSAGES[category][type].message

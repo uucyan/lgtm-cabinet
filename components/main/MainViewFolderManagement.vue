@@ -69,6 +69,7 @@ export default
   computed:
     folders: -> @$store.state.folders.list
     configDialogVisible: -> @$store.state.state.configDialogVisible
+    config: -> @$store.state.config.config
   methods:
     showOpenFolderSelectDialog: ->
       folderPath = dialog.showOpenDialog null,
@@ -93,7 +94,7 @@ export default
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
     sendNotification:(type) ->
-      @$services.notification.notify(@, 'delete_folder', type)
+      @$services.notification.notify(@, 'delete_folder', type, @config.notificationPosition)
   components:
     'confirm-dialog': ConfirmDialog
 </script>

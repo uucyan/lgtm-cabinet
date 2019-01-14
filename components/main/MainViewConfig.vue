@@ -50,7 +50,7 @@ el-container.main
       label
         | 通知の位置
         br
-        | ※ 右上、右下、左上、左下から選択できます
+        | ※ フォルダの管理や画像のコピー時に行う通知です
       el-select.input(v-model='notificationPosition', @change="updateConfig('notificationPosition', notificationPosition)",  placeholder='Select')
         el-option(v-for='item in notificationPositionOptions', :key='item.value', :label='item.label', :value='item.value')
 </template>
@@ -69,7 +69,7 @@ export default
     imageListShowGifImage: true
     imageListKeepScrollPosition: false
     # 通知
-    notificationPosition: 'bottom-left'
+    notificationPosition: 'bottom-right'
     notificationPositionOptions: [
       {
         value: 'top-right'
