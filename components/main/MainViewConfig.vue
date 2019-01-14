@@ -7,14 +7,14 @@ el-container.main
       el-button(
         v-if="windowWidthSize > 700"
         icon='el-icon-refresh'
-        @click="resetConfig"
+        @click="showConfirmDialog"
         style='background: transparent; color: #ffffff;'
-      ) 設定をリセット
+      ) 設定を初期化
       el-button(
         v-else
         circle
         icon='el-icon-refresh'
-        @click="resetConfig"
+        @click="showConfirmDialog"
         style='background: transparent; color: #ffffff;'
       )
   el-main.wood-grain-white.z-index-0
@@ -59,10 +59,15 @@ el-container.main
         br
         | ※ 0.1 〜 10.0 秒まで指定可能です
       el-input-number.input(v-model='notificationDuration', @change="updateConfig('notificationDuration', notificationDuration)", :precision="1", :step="0.1", :max="10", :min="0.1")
+  confirm-dialog(
+      :message="resetConfirmMessage",
+      @close="hideConfirmDialog"
+    )
 </template>
 
 <script lang="coffee">
 import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
+import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
 
 export default
   name: 'MainViewFolderConfig'
@@ -95,6 +100,8 @@ export default
         label: '左下'
       }
     ]
+    resetConfirmMessage: ''
+
   created: ->
     @$store.dispatch('config/find')
 
@@ -114,10 +121,32 @@ export default
     # 設定の更新
     updateConfig:(key, value) ->
       @$store.dispatch('config/updateBy', {key: key, value: value})
+      @sendNotification('update_config', 'success')
 
     # 設定のリセット
     resetConfig: ->
       @$store.dispatch('config/remove')
+
+    # 確認ダイアログの表示
+    showConfirmDialog: ->
+      @resetConfirmMessage = "設定を初期状態に戻しますか？"
+      @$store.commit('state/confirmDialogVisible', true)
+
+    # 確認ダイアログを閉じる
+    hideConfirmDialog:(isOk) ->
+      @$store.commit('state/confirmDialogVisible', false)
+      type = 'warning'
+      if isOk is true
+        @resetConfig()
+        type = 'success'
+      @sendNotification('reset_config', type)
+
+    # 通知
+    sendNotification:(category, type) ->
+      @$services.notification.notify(@, category, type, @config.notificationPosition, @config.notificationDuration)
+
+  components:
+    'confirm-dialog': ConfirmDialog
 </script>
 
 <style lang="sass" scoped>

@@ -23,6 +23,17 @@ export default class Notification
       warning:
         title: '警告'
         message: 'フォルダを削除しませんでした。'
+    update_config:
+      success:
+        title: '成功'
+        message: '設定の更新に成功しました。'
+    reset_config:
+      success:
+        title: '成功'
+        message: '設定の初期化に成功しました。'
+      warning:
+        title: '警告'
+        message: '設定の初期化をしませんでした。'
 
   notify: (vue, category, type, position, duration) ->
     vue.$notify
