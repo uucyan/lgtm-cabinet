@@ -49,7 +49,7 @@ el-container.main
       class="dialog-footer"
     )
     confirm-dialog(
-      :folder="targetFolder",
+      :message="deleteConfirmMessage",
       @close="hideConfirmDialog"
     )
 </template>
@@ -65,7 +65,8 @@ export default
   name: 'MainViewFolderManagement'
   mixins: [ HandleResizeMixin ]
   data: ->
-    targetFolder: {}
+    deleteTargetFolder: {}
+    deleteConfirmMessage: ''
   computed:
     folders: -> @$store.state.folders.list
     configDialogVisible: -> @$store.state.state.configDialogVisible
@@ -78,21 +79,27 @@ export default
         defaultPath: '.'
       if folderPath?
         @insertFolder(folderPath[0])
+
     insertFolder:(folderPath) ->
       @$store.dispatch('folders/insert', folderPath)
+
     showConfirmDialog:(folder) ->
-      @targetFolder = folder
+      @deleteTargetFolder = folder
+      @deleteConfirmMessage = folder.name + "フォルダを削除しますか？\n※ 実際のフォルダは削除されません"
       @$store.commit('state/confirmDialogVisible', true)
+
     hideConfirmDialog:(isOk) ->
       @$store.commit('state/confirmDialogVisible', false)
       type = 'warning'
       if isOk is true
-        @deleteFolder(@targetFolder)
+        @deleteFolder(@deleteTargetFolder)
         type = 'success'
-      @targetFolder = {}
+      @deleteTargetFolder = {}
       @sendNotification(type)
+
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
+
     sendNotification:(type) ->
       @$services.notification.notify(@, 'delete_folder', type, @config.notificationPosition, @config.notificationDuration)
   components:

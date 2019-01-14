@@ -6,9 +6,7 @@ el-dialog(
   :before-close="close"
 )
   el-main(style="height: 150px")
-    span(v-if="folder") {{ folder.name }} フォルダを削除しますか？
-    br
-    span ※実際のフォルダは削除されません。
+    span.message {{ message }}
   span(
     slot="footer",
     class="dialog-footer"
@@ -22,7 +20,7 @@ import ChangeStyleMixin from "~/components/dialog/ChangeStyleMixin.coffee"
 
 export default
   props:
-    folder: Object
+    message: String
   mixins: [ ChangeStyleMixin ]
   computed:
     confirmDialogVisible: -> @$store.state.state.confirmDialogVisible
@@ -32,4 +30,6 @@ export default
 </script>
 
 <style lang="sass" scoped>
+.message
+  white-space: pre-wrap
 </style>
