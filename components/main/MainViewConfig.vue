@@ -59,6 +59,10 @@ el-container.main
         br
         | ※ 0.1 〜 10.0 秒まで指定可能です
       el-input-number.input(v-model='notificationDuration', @change="updateConfig('notificationDuration', notificationDuration)", :precision="1", :step="0.1", :max="10", :min="0.1")
+      span.input-number-unit 秒
+    div.form-item
+      label 設定の変更時に通知をする
+      el-switch.input(v-model='notificationConfigUpdateNotify', @change="updateConfig('notificationConfigUpdateNotify', notificationConfigUpdateNotify)", active-text='する', inactive-text='しない' active-color="#744d30")
   confirm-dialog(
       :message="resetConfirmMessage",
       @close="hideConfirmDialog"
@@ -82,6 +86,7 @@ export default
     # 通知
     notificationPosition: 'bottom-right'
     notificationDuration: 4.5
+    notificationConfigUpdateNotify: true
     notificationPositionOptions: [
       {
         value: 'top-right'
@@ -116,12 +121,14 @@ export default
       @imageListKeepScrollPosition = @config.imageListKeepScrollPosition
       @notificationPosition = @config.notificationPosition
       @notificationDuration = @config.notificationDuration
+      @notificationConfigUpdateNotify = @config.notificationConfigUpdateNotify
 
   methods:
     # 設定の更新
     updateConfig:(key, value) ->
       @$store.dispatch('config/updateBy', {key: key, value: value})
-      @sendNotification('update_config', 'success')
+      if @config.notificationConfigUpdateNotify
+        @sendNotification('update_config', 'success')
 
     # 設定のリセット
     resetConfig: ->
@@ -169,6 +176,10 @@ i
   display: flex
   border-bottom: solid #573216 1px
   padding: 1.5em 0 0.5em 1.5em
+
+.input-number-unit
+  margin-top: auto
+  margin-left: 10px
 
 .margin-bottom-20px
   margin-bottom: 20px

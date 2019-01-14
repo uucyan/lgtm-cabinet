@@ -11,6 +11,7 @@ export const state = () => ({
     // 通知
     notificationPosition: 'bottom-right',
     notificationDuration: 4.5,
+    notificationConfigUpdateNotify: true,
   },
   config: {}
 })
