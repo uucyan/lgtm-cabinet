@@ -1,6 +1,8 @@
 # 通知用のサービス
 # element-ui の Notification を利用
 # SEE：http://element.eleme.io/2.4/#/en-US/component/notification
+import Vue from 'vue'
+
 export default class Notification
   NOTIFICATION_MESSAGES =
     copy_image:
@@ -35,8 +37,8 @@ export default class Notification
         title: '警告'
         message: '設定の初期化をしませんでした。'
 
-  notify: (vue, category, type, position, duration) ->
-    vue.$notify
+  notify: (category, type, position, duration) ->
+    Vue.prototype.$notify
       type: type
       position: position
       duration: duration * 1000

@@ -64,9 +64,9 @@ el-container.main
       label 設定の変更時に通知をする
       el-switch.input(v-model='notificationConfigUpdateNotify', @change="updateConfig('notificationConfigUpdateNotify', notificationConfigUpdateNotify)", active-text='する', inactive-text='しない' active-color="#744d30")
   confirm-dialog(
-      :message="resetConfirmMessage",
-      @close="hideConfirmDialog"
-    )
+    :message="resetConfirmMessage",
+    @close="hideConfirmDialog"
+  )
 </template>
 
 <script lang="coffee">
@@ -108,7 +108,7 @@ export default
     resetConfirmMessage: ''
 
   created: ->
-    @$store.dispatch('config/find')
+    @$store.dispatch('config/find', false)
 
   computed:
     config: -> @$store.state.config.config
@@ -127,8 +127,6 @@ export default
     # 設定の更新
     updateConfig:(key, value) ->
       @$store.dispatch('config/updateBy', {key: key, value: value})
-      if @config.notificationConfigUpdateNotify
-        @sendNotification('update_config', 'success')
 
     # 設定のリセット
     resetConfig: ->
@@ -150,7 +148,7 @@ export default
 
     # 通知
     sendNotification:(category, type) ->
-      @$services.notification.notify(@, category, type, @config.notificationPosition, @config.notificationDuration)
+      @$services.notification.notify(category, type, @config.notificationPosition, @config.notificationDuration)
 
   components:
     'confirm-dialog': ConfirmDialog

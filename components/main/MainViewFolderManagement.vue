@@ -48,10 +48,10 @@ el-container.main
       slot="footer",
       class="dialog-footer"
     )
-    confirm-dialog(
-      :message="deleteConfirmMessage",
-      @close="hideConfirmDialog"
-    )
+  confirm-dialog(
+    :message="deleteConfirmMessage",
+    @close="hideConfirmDialog"
+  )
 </template>
 
 <script lang="coffee">
@@ -101,7 +101,7 @@ export default
       @$store.dispatch('folders/delete', folder)
 
     sendNotification:(type) ->
-      @$services.notification.notify(@, 'delete_folder', type, @config.notificationPosition, @config.notificationDuration)
+      @$services.notification.notify('delete_folder', type, @config.notificationPosition, @config.notificationDuration)
   components:
     'confirm-dialog': ConfirmDialog
 </script>

@@ -27,8 +27,8 @@ export const mutations = {
 }
 
 export const actions = {
-  find({ commit }) {
-    // データが1件も存在していなけれな、デフォルトの設定値をセット
+  find({ state, commit }, isUpdate) {
+    // データが1件も存在していなければ、デフォルトの設定値をセット
     // そうでなければ DB から取得したデータをセット
     Vue.prototype.$db.config.count({}, ((err, count) => {
       if (count == 0) {
@@ -37,7 +37,16 @@ export const actions = {
       // 基本的に1件しか config のデータは保存されていないはずだが、
       // 念の為、最初の1件だけ取得する
       Vue.prototype.$db.config.find({}).sort({}).limit(1).exec((err, docs) => {
-        commit('set', {config: docs[0], isDefault: false})
+        commit('set', { config: docs[0], isDefault: false })
+        // 設定の変更時に通知する
+        if (isUpdate && state.config.notificationConfigUpdateNotify) {
+          Vue.prototype.$services.notification.notify(
+            'update_config',
+            'success',
+            state.config.notificationPosition,
+            state.config.notificationDuration
+          )
+        }
       })
     }).bind(this))
   },
@@ -50,7 +59,7 @@ export const actions = {
     Vue.prototype.$db.config.insert(config, ((err, newDoc) => {
       console.log('config insert error：' + err)
     }).bind(this))
-    dispatch('find')
+    dispatch('find', true)
   },
 
   // 設定の更新
@@ -69,7 +78,7 @@ export const actions = {
           console.log('config update error：' + err)
         }).bind(this)
       )
-      dispatch('find')
+      dispatch('find', true)
     })
   },
 
@@ -83,6 +92,6 @@ export const actions = {
         console.log('config all remove error：' + err)
       }).bind(this)
     )
-    dispatch('find')
+    dispatch('find', false)
   }
 }
