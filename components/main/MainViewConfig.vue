@@ -53,6 +53,12 @@ el-container.main
         | ※ フォルダの管理や画像のコピー時に行う通知です
       el-select.input(v-model='notificationPosition', @change="updateConfig('notificationPosition', notificationPosition)",  placeholder='Select')
         el-option(v-for='item in notificationPositionOptions', :key='item.value', :label='item.label', :value='item.value')
+    div.form-item
+      label
+        | 通知の表示時間
+        br
+        | ※ 0.1 〜 10.0 秒まで指定可能です
+      el-input-number.input(v-model='notificationDuration', @change="updateConfig('notificationDuration', notificationDuration)", :precision="1", :step="0.1", :max="10", :min="0.1")
 </template>
 
 <script lang="coffee">
@@ -70,6 +76,7 @@ export default
     imageListKeepScrollPosition: false
     # 通知
     notificationPosition: 'bottom-right'
+    notificationDuration: 4.5
     notificationPositionOptions: [
       {
         value: 'top-right'
@@ -101,6 +108,7 @@ export default
       @imageListShowGifImage = @config.imageListShowGifImage
       @imageListKeepScrollPosition = @config.imageListKeepScrollPosition
       @notificationPosition = @config.notificationPosition
+      @notificationDuration = @config.notificationDuration
 
   methods:
     # 設定の更新

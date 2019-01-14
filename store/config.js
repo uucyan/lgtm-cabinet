@@ -10,6 +10,7 @@ export const state = () => ({
     imageListKeepScrollPosition: false,
     // 通知
     notificationPosition: 'bottom-right',
+    notificationDuration: 4.5,
   },
   config: {}
 })

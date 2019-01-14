@@ -94,7 +94,7 @@ export default
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
     sendNotification:(type) ->
-      @$services.notification.notify(@, 'delete_folder', type, @config.notificationPosition)
+      @$services.notification.notify(@, 'delete_folder', type, @config.notificationPosition, @config.notificationDuration)
   components:
     'confirm-dialog': ConfirmDialog
 </script>
