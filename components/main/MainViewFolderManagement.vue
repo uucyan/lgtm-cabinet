@@ -44,11 +44,7 @@ el-container.main
             circle
             @click='showConfirmDialog(scope.row)'
           )
-    span(
-      slot="footer",
-      class="dialog-footer"
-    )
-  confirm-dialog(
+  delete-folder-confirm-dialog(
     :message="deleteConfirmMessage",
     @close="hideConfirmDialog"
   )
@@ -56,7 +52,7 @@ el-container.main
 
 <script lang="coffee">
 import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
-import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
+import DeleteFolderConfirmDialog from '~/components/dialog/DeleteFolderConfirmDialog.vue'
 
 remote = require('electron').remote
 dialog = remote.dialog
@@ -69,7 +65,7 @@ export default
     deleteConfirmMessage: ''
   computed:
     folders: -> @$store.state.folders.list
-    configDialogVisible: -> @$store.state.state.configDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
     config: -> @$store.state.config.config
   methods:
     showOpenFolderSelectDialog: ->
@@ -86,10 +82,10 @@ export default
     showConfirmDialog:(folder) ->
       @deleteTargetFolder = folder
       @deleteConfirmMessage = folder.name + "フォルダを削除しますか？\n※ 実際のフォルダは削除されません"
-      @$store.commit('state/confirmDialogVisible', true)
+      @$store.commit('state/deleteFolderConfirmDialogVisible', true)
 
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/confirmDialogVisible', false)
+      @$store.commit('state/deleteFolderConfirmDialogVisible', false)
       type = 'warning'
       if isOk is true
         @deleteFolder(@deleteTargetFolder)
@@ -103,7 +99,7 @@ export default
     sendNotification:(type) ->
       @$services.notification.notify('delete_folder', type, @config.notificationPosition, @config.notificationDuration)
   components:
-    'confirm-dialog': ConfirmDialog
+    'delete-folder-confirm-dialog': DeleteFolderConfirmDialog
 </script>
 
 <style lang="sass" scoped>

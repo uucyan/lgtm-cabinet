@@ -1,10 +1,13 @@
 export const state = () => ({
+  // LGTM Cabinet：''
   // フォルダ管理：folderManagement
   // 設定：config
   // フォルダ：folder
   selectedMenu: '',
-  // 確認ダイアログの表示フラグ
-  confirmDialogVisible: false,
+  // 設定を初期化確認ダイアログの表示フラグ
+  resetConfigConfirmDialogVisible: false,
+  // フォルダ削除確認ダイアログの表示フラグ
+  deleteFolderConfirmDialogVisible: false,
   // はじめにダイアログの表示フラグ
   descriptionDialogVisible: false,
   // リリースダイアログの表示フラグ
@@ -19,8 +22,11 @@ export const mutations = {
   selectMenu(state, menuName) {
     state.selectedMenu = menuName
   },
-  confirmDialogVisible(state, visible) {
-    state.confirmDialogVisible = visible
+  resetConfigConfirmDialogVisible(state, visible) {
+    state.resetConfigConfirmDialogVisible = visible
+  },
+  deleteFolderConfirmDialogVisible(state, visible) {
+    state.deleteFolderConfirmDialogVisible = visible
   },
   descriptionDialogVisible(state, visible) {
     state.descriptionDialogVisible = visible

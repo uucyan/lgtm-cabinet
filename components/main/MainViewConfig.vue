@@ -5,7 +5,7 @@ el-container.main
       p.header-title.overflow-x-auto 設定
     div.header-element-right
       el-button(
-        v-if="windowWidthSize > 700"
+        v-if="windowWidthSize > 900"
         icon='el-icon-refresh'
         @click="showConfirmDialog"
         style='background: transparent; color: #ffffff;'
@@ -63,7 +63,7 @@ el-container.main
     div.form-item
       label 設定の変更時に通知をする
       el-switch.input(v-model='notificationConfigUpdateNotify', @change="updateConfig('notificationConfigUpdateNotify', notificationConfigUpdateNotify)", active-text='する', inactive-text='しない' active-color="#744d30")
-  confirm-dialog(
+  reset-config-confirm-dialog(
     :message="resetConfirmMessage",
     @close="hideConfirmDialog"
   )
@@ -71,7 +71,7 @@ el-container.main
 
 <script lang="coffee">
 import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
-import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
+import ResetConfigConfirmDialog from '~/components/dialog/ResetConfigConfirmDialog.vue'
 
 export default
   name: 'MainViewFolderConfig'
@@ -135,11 +135,11 @@ export default
     # 確認ダイアログの表示
     showConfirmDialog: ->
       @resetConfirmMessage = "設定を初期状態に戻しますか？"
-      @$store.commit('state/confirmDialogVisible', true)
+      @$store.commit('state/resetConfigConfirmDialogVisible', true)
 
     # 確認ダイアログを閉じる
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/confirmDialogVisible', false)
+      @$store.commit('state/resetConfigConfirmDialogVisible', false)
       type = 'warning'
       if isOk is true
         @resetConfig()
@@ -151,7 +151,7 @@ export default
       @$services.notification.notify(category, type, @config.notificationPosition, @config.notificationDuration)
 
   components:
-    'confirm-dialog': ConfirmDialog
+    'reset-config-confirm-dialog': ResetConfigConfirmDialog
 </script>
 
 <style lang="sass" scoped>

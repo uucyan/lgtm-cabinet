@@ -5,7 +5,8 @@ export default
     # ダイアログが表示された 0.1 秒後にスタイルを変更する
     # body の DOM が生成され終わるのを待つため
     descriptionDialogVisible: -> setTimeout(@setDialogStyles, 100)
-    confirmDialogVisible: -> setTimeout(@setDialogStyles, 100)
+    resetConfigConfirmDialogVisible: -> setTimeout(@setDialogStyles, 100)
+    deleteFolderConfirmDialogVisible: -> setTimeout(@setDialogStyles, 100)
     releaseDialogVisible: -> setTimeout(@setDialogStyles, 100)
   methods:
     # ダイアログのスタイル

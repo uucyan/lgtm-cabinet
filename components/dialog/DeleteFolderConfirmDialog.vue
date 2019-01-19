@@ -2,7 +2,7 @@
 el-dialog(
   title="確認",
   width="30%",
-  :visible.sync="confirmDialogVisible",
+  :visible.sync="deleteFolderConfirmDialogVisible",
   :before-close="close"
 )
   el-main(style="height: 150px")
@@ -23,13 +23,11 @@ export default
     message: String
   mixins: [ ChangeStyleMixin ]
   computed:
-    confirmDialogVisible: -> @$store.state.state.confirmDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
   methods:
     close:(isOk = false) ->
       @$emit('close', isOk)
 </script>
 
 <style lang="sass" scoped>
-.message
-  white-space: pre-wrap
 </style>
