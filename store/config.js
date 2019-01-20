@@ -32,7 +32,11 @@ export const actions = {
     // そうでなければ DB から取得したデータをセット
     Vue.prototype.$db.config.count({}, ((err, count) => {
       if (count == 0) {
-        return commit('set', {config: {}, isDefault: true})
+        commit('set', { config: {}, isDefault: true })
+        if (isUpdate && state.config.notificationConfigUpdateNotify) {
+          Vue.prototype.$services.notification.notify('reset_config', 'success', state.config)
+        }
+        return
       }
       // 基本的に1件しか config のデータは保存されていないはずだが、
       // 念の為、最初の1件だけ取得する
@@ -40,12 +44,7 @@ export const actions = {
         commit('set', { config: docs[0], isDefault: false })
         // 設定の変更時に通知する
         if (isUpdate && state.config.notificationConfigUpdateNotify) {
-          Vue.prototype.$services.notification.notify(
-            'update_config',
-            'success',
-            state.config.notificationPosition,
-            state.config.notificationDuration
-          )
+          Vue.prototype.$services.notification.notify('update_config', 'success', state.config)
         }
       })
     }).bind(this))
@@ -92,6 +91,6 @@ export const actions = {
         console.log('config all remove error：' + err)
       }).bind(this)
     )
-    dispatch('find', false)
+    dispatch('find', true)
   }
 }

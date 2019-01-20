@@ -37,10 +37,10 @@ export default class Notification
         title: '警告'
         message: '設定の初期化をしませんでした。'
 
-  notify: (category, type, position, duration) ->
+  notify: (category, type, config) ->
     Vue.prototype.$notify
       type: type
-      position: position
-      duration: duration * 1000
+      position: config.notificationPosition
+      duration: config.notificationDuration * 1000
       title: NOTIFICATION_MESSAGES[category][type].title
       message: NOTIFICATION_MESSAGES[category][type].message

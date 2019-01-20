@@ -67,7 +67,7 @@ export default
       @sendNotification('success')
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
-      @$services.notification.notify('copy_image', type, @config.notificationPosition, @config.notificationDuration)
+      @$services.notification.notify('copy_image', type, @config)
     scrollTop: ->
       return if @config.imageListKeepScrollPosition
       element = document.getElementById('image-list')

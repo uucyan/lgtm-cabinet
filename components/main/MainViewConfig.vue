@@ -140,15 +140,14 @@ export default
     # 確認ダイアログを閉じる
     hideConfirmDialog:(isOk) ->
       @$store.commit('state/resetConfigConfirmDialogVisible', false)
-      type = 'warning'
       if isOk is true
         @resetConfig()
-        type = 'success'
-      @sendNotification('reset_config', type)
+      else
+        @sendNotification('reset_config', 'warning')
 
     # 通知
     sendNotification:(category, type) ->
-      @$services.notification.notify(category, type, @config.notificationPosition, @config.notificationDuration)
+      @$services.notification.notify(category, type, @config)
 
   components:
     'reset-config-confirm-dialog': ResetConfigConfirmDialog
