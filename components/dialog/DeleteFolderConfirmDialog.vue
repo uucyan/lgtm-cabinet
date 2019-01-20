@@ -2,13 +2,11 @@
 el-dialog(
   title="確認",
   width="30%",
-  :visible.sync="confirmDialogVisible",
+  :visible.sync="deleteFolderConfirmDialogVisible",
   :before-close="close"
 )
   el-main(style="height: 150px")
-    span(v-if="folder") {{ folder.name }} フォルダを削除しますか？
-    br
-    span ※実際のフォルダは削除されません。
+    span.message {{ message }}
   span(
     slot="footer",
     class="dialog-footer"
@@ -22,10 +20,10 @@ import ChangeStyleMixin from "~/components/dialog/ChangeStyleMixin.coffee"
 
 export default
   props:
-    folder: Object
+    message: String
   mixins: [ ChangeStyleMixin ]
   computed:
-    confirmDialogVisible: -> @$store.state.state.confirmDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
   methods:
     close:(isOk = false) ->
       @$emit('close', isOk)

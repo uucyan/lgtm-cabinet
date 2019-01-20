@@ -7,7 +7,7 @@ el-dialog(
 )
   el-main(style="height: 400px")
     el-collapse(v-model='activeName', accordion='')
-      el-collapse-item(v-for="(notes, index) in ReleaseNote.notes", :title="ReleaseNote.title(index)", :name="index")
+      el-collapse-item(v-for="(notes, index) in ReleaseNote.notes", :key="ReleaseNote.version", :title="ReleaseNote.title(index)", :name="index")
         div.padding-left-10px
           h3 更新内容
           ul

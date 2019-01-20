@@ -19,7 +19,7 @@ el-container.main
         v-bind:disabled='!isExistsImages'
         style='background: transparent; color: #ffffff;'
       )
-  el-main.wood-grain-white
+  el-main.wood-grain-white(id='image-list')
     ul.itemlist.z-index-0(v-if="!isDev")
       li(v-for="image in images")
         img(
@@ -49,6 +49,9 @@ export default
     images: -> @$store.state.folders.images
     folderName: -> @$store.state.folders.selectFolderName
     isExistsImages: -> @$store.getters['folders/isExistsImages']
+    config: -> @$store.state.config.config
+  watch:
+     images: -> @scrollTop()
   methods:
     # 画像をランダムで選択
     randomCopy: ->
@@ -64,7 +67,11 @@ export default
       @sendNotification('success')
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
-      @$services.notification.notify(@, 'copy_image', type)
+      @$services.notification.notify('copy_image', type, @config)
+    scrollTop: ->
+      return if @config.imageListKeepScrollPosition
+      element = document.getElementById('image-list')
+      element.scrollTop = 0 if element?
 </script>
 
 <style lang="sass" scoped>

@@ -1,6 +1,8 @@
 # 通知用のサービス
 # element-ui の Notification を利用
 # SEE：http://element.eleme.io/2.4/#/en-US/component/notification
+import Vue from 'vue'
+
 export default class Notification
   NOTIFICATION_MESSAGES =
     copy_image:
@@ -23,11 +25,22 @@ export default class Notification
       warning:
         title: '警告'
         message: 'フォルダを削除しませんでした。'
+    update_config:
+      success:
+        title: '成功'
+        message: '設定の更新に成功しました。'
+    reset_config:
+      success:
+        title: '成功'
+        message: '設定の初期化に成功しました。'
+      warning:
+        title: '警告'
+        message: '設定の初期化をしませんでした。'
 
-  notify: (vue, category, type) ->
-    vue.$notify
+  notify: (category, type, config) ->
+    Vue.prototype.$notify
       type: type
-      showClose: true
-      position: 'bottom-right'
+      position: config.notificationPosition
+      duration: config.notificationDuration * 1000
       title: NOTIFICATION_MESSAGES[category][type].title
       message: NOTIFICATION_MESSAGES[category][type].message

@@ -44,19 +44,15 @@ el-container.main
             circle
             @click='showConfirmDialog(scope.row)'
           )
-    span(
-      slot="footer",
-      class="dialog-footer"
-    )
-    confirm-dialog(
-      :folder="targetFolder",
-      @close="hideConfirmDialog"
-    )
+  delete-folder-confirm-dialog(
+    :message="deleteConfirmMessage",
+    @close="hideConfirmDialog"
+  )
 </template>
 
 <script lang="coffee">
 import HandleResizeMixin from "~/components/main/HandleResizeMixin.coffee"
-import ConfirmDialog from '~/components/dialog/ConfirmDialog.vue'
+import DeleteFolderConfirmDialog from '~/components/dialog/DeleteFolderConfirmDialog.vue'
 
 remote = require('electron').remote
 dialog = remote.dialog
@@ -65,10 +61,12 @@ export default
   name: 'MainViewFolderManagement'
   mixins: [ HandleResizeMixin ]
   data: ->
-    targetFolder: {}
+    deleteTargetFolder: {}
+    deleteConfirmMessage: ''
   computed:
     folders: -> @$store.state.folders.list
-    configDialogVisible: -> @$store.state.state.configDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
+    config: -> @$store.state.config.config
   methods:
     showOpenFolderSelectDialog: ->
       folderPath = dialog.showOpenDialog null,
@@ -77,25 +75,31 @@ export default
         defaultPath: '.'
       if folderPath?
         @insertFolder(folderPath[0])
+
     insertFolder:(folderPath) ->
       @$store.dispatch('folders/insert', folderPath)
+
     showConfirmDialog:(folder) ->
-      @targetFolder = folder
-      @$store.commit('state/confirmDialogVisible', true)
+      @deleteTargetFolder = folder
+      @deleteConfirmMessage = folder.name + "フォルダを削除しますか？\n※ 実際のフォルダは削除されません"
+      @$store.commit('state/deleteFolderConfirmDialogVisible', true)
+
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/confirmDialogVisible', false)
+      @$store.commit('state/deleteFolderConfirmDialogVisible', false)
       type = 'warning'
       if isOk is true
-        @deleteFolder(@targetFolder)
+        @deleteFolder(@deleteTargetFolder)
         type = 'success'
-      @targetFolder = {}
+      @deleteTargetFolder = {}
       @sendNotification(type)
+
     deleteFolder:(folder) ->
       @$store.dispatch('folders/delete', folder)
+
     sendNotification:(type) ->
-      @$services.notification.notify(@, 'delete_folder', type)
+      @$services.notification.notify('delete_folder', type, @config)
   components:
-    'confirm-dialog': ConfirmDialog
+    'delete-folder-confirm-dialog': DeleteFolderConfirmDialog
 </script>
 
 <style lang="sass" scoped>
