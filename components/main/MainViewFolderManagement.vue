@@ -75,9 +75,11 @@ export default
         defaultPath: '.'
       if folderPath?
         @insertFolder(folderPath[0])
+      else
+        @sendNotification('add_folder', 'warning')
 
     insertFolder:(folderPath) ->
-      @$store.dispatch('folders/insert', folderPath)
+      @$store.dispatch('folders/insert', {folderPath: folderPath, config: @config})
 
     showConfirmDialog:(folder) ->
       @deleteTargetFolder = folder
@@ -86,18 +88,17 @@ export default
 
     hideConfirmDialog:(isOk) ->
       @$store.commit('state/deleteFolderConfirmDialogVisible', false)
-      type = 'warning'
       if isOk is true
         @deleteFolder(@deleteTargetFolder)
-        type = 'success'
+      else
+        @sendNotification('delete_folder', 'warning')
       @deleteTargetFolder = {}
-      @sendNotification(type)
 
     deleteFolder:(folder) ->
-      @$store.dispatch('folders/delete', folder)
+      @$store.dispatch('folders/delete', {folder: folder, config: @config})
 
-    sendNotification:(type) ->
-      @$services.notification.notify('delete_folder', type, @config)
+    sendNotification:(category, type) ->
+      @$services.notification.notify(category, type, @config)
   components:
     'delete-folder-confirm-dialog': DeleteFolderConfirmDialog
 </script>

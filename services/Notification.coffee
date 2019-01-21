@@ -15,6 +15,16 @@ export default class Notification
       warning:
         title: '警告'
         message: 'フォルダが選択されていないか画像がありません。'
+    add_folder:
+      success:
+        title: '成功'
+        message: 'フォルダの追加に成功しました。'
+      error:
+        title: '失敗'
+        message: 'フォルダの追加に失敗しました。'
+      warning:
+        title: '警告'
+        message: 'フォルダを追加をしませんでした。'
     delete_folder:
       success:
         title: '成功'
