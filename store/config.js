@@ -30,7 +30,7 @@ export const actions = {
   find({ state, commit }, isUpdate) {
     // データが1件も存在していなければ、デフォルトの設定値をセット
     // そうでなければ DB から取得したデータをセット
-    Vue.prototype.$db.config.count({}, ((err, count) => {
+    Vue.prototype.$db.config.count({}, ((error, count) => {
       if (count == 0) {
         commit('set', { config: {}, isDefault: true })
         if (isUpdate && state.config.notificationConfigUpdateNotify) {
@@ -40,7 +40,7 @@ export const actions = {
       }
       // 基本的に1件しか config のデータは保存されていないはずだが、
       // 念の為、最初の1件だけ取得する
-      Vue.prototype.$db.config.find({}).sort({}).limit(1).exec((err, docs) => {
+      Vue.prototype.$db.config.find({}).sort({}).limit(1).exec((error, docs) => {
         commit('set', { config: docs[0], isDefault: false })
         // 設定の変更時に通知する
         if (isUpdate && state.config.notificationConfigUpdateNotify) {
@@ -55,15 +55,18 @@ export const actions = {
     let config = Object.assign({}, state.config)
     config[editConfig.key] = editConfig.value
 
-    Vue.prototype.$db.config.insert(config, ((err, newDoc) => {
-      console.log('config insert error：' + err)
+    Vue.prototype.$db.config.insert(config, ((error, newDoc) => {
+      if (error == null) {
+        dispatch('find', true)
+      } else {
+        Vue.prototype.$services.notification.notify('update_config', 'error', state.config, error)
+      }
     }).bind(this))
-    dispatch('find', true)
   },
 
   // 設定の更新
   updateBy({ state, dispatch }, editConfig) {
-    Vue.prototype.$db.config.count({}, (err, count) => {
+    Vue.prototype.$db.config.count({}, (error, count) => {
       // DB にデータが存在しない場合は新規登録する
       if (count == 0) {
         return dispatch('insert', editConfig)
@@ -73,24 +76,30 @@ export const actions = {
         { _id: state.config._id },
         { $set: { [editConfig.key]: editConfig.value } },
         { multi: true },
-        ((err, numReplaced) => {
-          console.log('config update error：' + err)
+        ((error, numReplaced) => {
+          if (error == null) {
+            dispatch('find', true)
+          } else {
+            Vue.prototype.$services.notification.notify('update_config', 'error', state.config, error)
+          }
         }).bind(this)
       )
-      dispatch('find', true)
     })
   },
 
   // 設定の削除
   // DB の設定を削除することで、デフォルトの設定値にリセットする
-  remove({ dispatch }) {
+  remove({ state, dispatch }) {
     Vue.prototype.$db.config.remove(
       {},
       { multi: true },
-      ((err, numRemoved) => {
-        console.log('config all remove error：' + err)
+      ((error, numRemoved) => {
+        if (error == null) {
+          dispatch('find', true)
+        } else {
+          Vue.prototype.$services.notification.notify('reset_config', 'error', state.config, error)
+        }
       }).bind(this)
     )
-    dispatch('find', true)
   }
 }

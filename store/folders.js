@@ -32,40 +32,54 @@ export const mutations = {
 
 export const actions = {
   // DBに保存したフォルダ一覧をすべて取得
-  findAll({ commit }) {
-    Vue.prototype.$db.folders.find({}, ((err, docs) => {
+  findAll({ commit }, params = null) {
+    Vue.prototype.$db.folders.find({}, ((error, docs) => {
       commit('set', docs)
+      if (params && params.isUpdate) {
+        Vue.prototype.$services.notification.notify(params.notificationType, 'success', params.config)
+      }
     }).bind(this));
   },
+
   // フォルダをDBに保存して一覧を更新
-  insert({ dispatch }, folderPath) {
+  insert({ state, dispatch }, params) {
     let doc = {
-      name: folderPath.split('/').pop(),
-      path: folderPath,
+      name: params.folderPath.split('/').pop(),
+      path: params.folderPath,
     }
-    Vue.prototype.$db.folders.insert(doc, (err, newDoc) => {
-      console.log('folder insert error：' + err)
+    Vue.prototype.$db.folders.insert(doc, (error, newDoc) => {
+      if (error == null) {
+        dispatch('findAll', {isUpdate: true, notificationType: 'add_folder', config: params.config})
+      } else {
+        Vue.prototype.$services.notification.notify('add_folder', 'error', params.config, error)
+      }
     })
-    dispatch('findAll')
   },
+
   // フォルダを一つ削除して一覧を更新
-  delete({ dispatch }, folder) {
+  delete({ dispatch }, params) {
     Vue.prototype.$db.folders.remove(
-      { _id: folder._id },
+      {
+        _id: params.folder._id
+      },
       {},
-      function (err, numRemoved) {
-        console.log('folder delete error：' + err)
+      function (error, numRemoved) {
+        if (error == null) {
+          dispatch('findAll', {isUpdate: true, notificationType: 'delete_folder', config: params.config})
+        } else {
+          Vue.prototype.$services.notification.notify('delete_folder', 'error', params.config, error)
+        }
       }
     )
-    dispatch('findAll')
   },
+
   // 選択したフォルダの画像一覧を取得
   getImagePaths({ commit }, params) {
     const folder = params.folder
     const imageListShowGifImage = params.imageListShowGifImage
     const regexp = imageListShowGifImage ? /^image\/(jpeg|png|gif)/ : /^image\/(jpeg|png)/
 
-    fs.readdir(folder.path, (err, fileNames) => {
+    fs.readdir(folder.path, (error, fileNames) => {
       let images = []
       for (let filename of fileNames) {
         const type = mime.lookup(path.extname(filename))

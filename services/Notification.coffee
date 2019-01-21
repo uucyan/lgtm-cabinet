@@ -15,6 +15,16 @@ export default class Notification
       warning:
         title: '警告'
         message: 'フォルダが選択されていないか画像がありません。'
+    add_folder:
+      success:
+        title: '成功'
+        message: 'フォルダの追加に成功しました。'
+      error:
+        title: '失敗'
+        message: 'フォルダの追加に失敗しました。'
+      warning:
+        title: '警告'
+        message: 'フォルダを追加をしませんでした。'
     delete_folder:
       success:
         title: '成功'
@@ -29,6 +39,9 @@ export default class Notification
       success:
         title: '成功'
         message: '設定の更新に成功しました。'
+      error:
+        title: '失敗'
+        message: '設定の更新に失敗しました。'
     reset_config:
       success:
         title: '成功'
@@ -36,11 +49,20 @@ export default class Notification
       warning:
         title: '警告'
         message: '設定の初期化をしませんでした。'
+      error:
+        title: '失敗'
+        message: '設定の初期化に失敗しました。'
 
-  notify: (category, type, config) ->
+  notify: (category, type, config, error = null) ->
     Vue.prototype.$notify
       type: type
       position: config.notificationPosition
       duration: config.notificationDuration * 1000
+      customClass: 'my-notification'
       title: NOTIFICATION_MESSAGES[category][type].title
-      message: NOTIFICATION_MESSAGES[category][type].message
+      message: @getMessage(category, type, error)
+
+  getMessage: (category, type, error) ->
+    message = NOTIFICATION_MESSAGES[category][type].message
+    return message if !error?
+    message + "\n" + 'エラー内容：' + error
