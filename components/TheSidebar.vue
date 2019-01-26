@@ -30,11 +30,20 @@ section.wood-grain-dark-brown
         span 設定
     el-submenu(index='3')
       template(slot='title')
+        span 外部サービス
+      el-menu-item(
+        index='3-1',
+        @click="select('theCatApi')"
+      )
+        i.el-icon-picture-outline
+        span TheCatAPI.com
+    el-submenu(index='4')
+      template(slot='title')
         span フォルダ
       el-menu-item(
         v-for="(folder, index) in folders",
         :key="folder._id",
-        :index="'3-' + index"
+        :index="'4-' + index"
         @click="select('folder', folder)"
       )
         i.el-icon-picture-outline
@@ -56,7 +65,7 @@ export default
         @$store.commit('folders/setSelectFolderName', folder.name)
     sidebarFileTabOpen: ->
       if @config.sidebarFileTabOpen? && @config.sidebarFileTabOpen
-        @$refs.menu.open 3
+        @$refs.menu.open 4
 </script>
 
 <style lang="sass" scoped>
