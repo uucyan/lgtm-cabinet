@@ -20,29 +20,40 @@ export const getters = {
 
 export const mutations = {
   set(state, docs) {
-    state.list = docs;
+    for (let i in docs) {
+      const date = docs[i].createdAt
+      const y = date.getFullYear()
+      const m = ("00" + (date.getMonth() + 1)).slice(-2)
+      const d = ("00" + date.getDate()).slice(-2)
+      const hh = ('00' + date.getHours()).slice(-2)
+      const mm = ('00' + date.getMinutes()).slice(-2)
+      const ss = ('00' + date.getSeconds()).slice(-2)
+      docs[i].createdAt = y + '/' + m + '/' + d + ' ' + hh + ':' + mm + ':' + ss
+    }
+    state.list = docs
   },
   setImages(state, images) {
-    state.images = images;
+    state.images = images
   },
   setSelectFolderName(state, name) {
-    state.selectFolderName = name;
+    state.selectFolderName = name
   }
 }
 
 export const actions = {
   // DBに保存したフォルダ一覧をすべて取得
-  findAll({ commit }, params = null) {
-    Vue.prototype.$db.folders.find({}, ((error, docs) => {
+  findAll({ commit }, params) {
+    const config = params.config
+    Vue.prototype.$db.folders.find({}).sort({ [config.folderSortTagetColmun]: config.folderSortOrder }).exec((error, docs) => {
       commit('set', docs)
       if (params && params.isUpdate) {
-        Vue.prototype.$services.notification.notify(params.notificationType, 'success', params.config)
+        Vue.prototype.$services.notification.notify(params.notificationType, 'success', config)
       }
-    }).bind(this));
+    })
   },
 
   // フォルダをDBに保存して一覧を更新
-  insert({ state, dispatch }, params) {
+  insert({ dispatch }, params) {
     let doc = {
       name: params.folderPath.split('/').pop(),
       path: params.folderPath,

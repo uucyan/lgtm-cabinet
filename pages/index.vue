@@ -10,11 +10,21 @@ import TheMainView from '~/components/TheMainView.vue'
 
 export default
   name: 'Index'
+
   components:
     'the-sidebar': TheSidebar
     'the-main-view': TheMainView
+
+  computed:
+    config: -> @$store.state.config.config
+
   created: ->
-    @$store.dispatch('folders/findAll')
+    @$store.dispatch('config/find', false)
+    setTimeout(@findAllFolders, 500)
+
+  methods:
+    findAllFolders: ->
+      @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
 </script>
 
 <style lang="sass" scoped>

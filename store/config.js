@@ -12,6 +12,9 @@ export const state = () => ({
     notificationPosition: 'bottom-right',
     notificationDuration: 4.5,
     notificationConfigUpdateNotify: true,
+    // フォルダ
+    folderSortTagetColmun: 'createdAt',
+    folderSortOrder: 1,  // 昇順：1, 降順：-1
   },
   config: {}
 })
