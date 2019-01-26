@@ -51,7 +51,7 @@ el-container.main
         | 通知の位置
         br
         | ※ フォルダの管理や画像のコピー時に行う通知です
-      el-select.input(v-model='notificationPosition', @change="updateConfig('notificationPosition', notificationPosition)",  placeholder='Select')
+      el-select.input(v-model='notificationPosition', @change="updateConfig('notificationPosition', notificationPosition)",  placeholder='選択')
         el-option(v-for='item in notificationPositionOptions', :key='item.value', :label='item.label', :value='item.value')
     div.form-item
       label
@@ -59,10 +59,25 @@ el-container.main
         br
         | ※ 0.1 〜 10.0 秒まで指定可能です
       el-input-number.input(v-model='notificationDuration', @change="updateConfig('notificationDuration', notificationDuration)", :precision="1", :step="0.1", :max="10", :min="0.1")
-      span.input-number-unit 秒
+      span.input-append-text 秒
     div.form-item
       label 設定の変更時に通知をする
       el-switch.input(v-model='notificationConfigUpdateNotify', @change="updateConfig('notificationConfigUpdateNotify', notificationConfigUpdateNotify)", active-text='する', inactive-text='しない' active-color="#744d30")
+    div.margin-bottom-20px
+
+    div.config-title
+      i.el-icon-message
+      span フォルダ
+    div.form-item
+      label
+        | フォルダのソート順
+        br
+        | ※ サイドバーとフォルダ管理に表示するフォルダの順番を設定できます
+      el-select.input(v-model='folderSortTagetColmun', @change="updateConfig('folderSortTagetColmun', folderSortTagetColmun)",  placeholder='選択')
+        el-option(v-for='item in folderSortTagetColmunOption', :key='item.value', :label='item.label', :value='item.value')
+      span.input-append-text の
+      el-select.input(v-model='folderSortOrder', @change="updateConfig('folderSortOrder', folderSortOrder)",  placeholder='選択')
+        el-option(v-for='item in folderSortOrderOption', :key='item.value', :label='item.label', :value='item.value')
   reset-config-confirm-dialog(
     :message="resetConfirmMessage",
     @close="hideConfirmDialog"
@@ -87,6 +102,8 @@ export default
     notificationPosition: 'bottom-right'
     notificationDuration: 4.5
     notificationConfigUpdateNotify: true
+    folderSortTagetColmun: 'createdAt'
+    folderSortOrder: 1
     notificationPositionOptions: [
       {
         value: 'top-right'
@@ -105,10 +122,27 @@ export default
         label: '左下'
       }
     ]
+    folderSortTagetColmunOption: [
+      {
+        value: 'name'
+        label: 'フォルダ名'
+      },
+      {
+        value: 'createdAt'
+        label: '追加日時'
+      },
+    ]
+    folderSortOrderOption: [
+      {
+        value: 1
+        label: '昇順'
+      },
+      {
+        value: -1
+        label: '降順'
+      },
+    ]
     resetConfirmMessage: ''
-
-  created: ->
-    @$store.dispatch('config/find', false)
 
   computed:
     config: -> @$store.state.config.config
@@ -122,6 +156,10 @@ export default
       @notificationPosition = @config.notificationPosition
       @notificationDuration = @config.notificationDuration
       @notificationConfigUpdateNotify = @config.notificationConfigUpdateNotify
+      @folderSortTagetColmun = @config.folderSortTagetColmun
+      @folderSortOrder = @config.folderSortOrder
+      # フォルダのソートを適用
+      @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
 
   methods:
     # 設定の更新
@@ -168,15 +206,17 @@ i
 
 .input
   width: 200px
+  margin-top: auto
 
 .form-item
   display: flex
   border-bottom: solid #573216 1px
   padding: 1.5em 0 0.5em 1.5em
 
-.input-number-unit
+.input-append-text
   margin-top: auto
   margin-left: 10px
+  margin-right: 10px
 
 .margin-bottom-20px
   margin-bottom: 20px

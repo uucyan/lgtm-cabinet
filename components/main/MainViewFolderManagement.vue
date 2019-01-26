@@ -32,9 +32,14 @@ el-container.main
         label='パス',
       )
       el-table-column(
+        prop='createdAt',
+        label='追加日時',
+        width='160'
+      )
+      el-table-column(
         fixed='right',
         label='操作',
-        width='120'
+        width='65'
       )
         template(slot-scope='scope')
           el-button(
