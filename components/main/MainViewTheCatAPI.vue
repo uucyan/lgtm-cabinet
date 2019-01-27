@@ -52,7 +52,7 @@ el-container.main
           v-bind:disabled='!isExistsImages'
           style='background: transparent; color: #ffffff;'
         )
-  el-main.wood-grain-white(id='image-list')
+  el-main.wood-grain-white(id='image-list', v-loading="loading")
     ul.itemlist.z-index-0
       li(v-for="image in images")
         img(
@@ -72,6 +72,7 @@ export default
   mixins: [ HandleResizeMixin ]
   data: ->
     images: []
+    loading: true
     searchOptionVisible: false
     limit: 9
     mimeTypes: ['jpg', 'png', 'gif']
@@ -86,6 +87,7 @@ export default
   methods:
     # TheCatAPI から画像を取得
     getCatImages: ->
+      @loading = true
       @searchOptionVisible = false
       @images = []
       axios.defaults.headers.common['x-api-key'] = '5c5955bc-4e22-4b18-b4a8-747a9622155d'
@@ -98,6 +100,7 @@ export default
         @sendNotification('external_service_connection', 'success')
       else
         @sendNotification('external_service_connection', 'error')
+      @loading = false
 
     # 画像をランダムで選択
     randomSelectImage: ->
