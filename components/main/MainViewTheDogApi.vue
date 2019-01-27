@@ -2,7 +2,7 @@
 el-container.main
   el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
     div.display-table
-      p.header-element-left2.header-title.overflow-x-auto TheDogAPI.com
+      a.header-element-left2.header-title.overflow-x-auto(href="https://thedogapi.com/" target="_blank") TheDogAPI.com
       div.header-element-right2
         el-popover(placement='top', v-model='searchOptionVisible')
           div.form-item
