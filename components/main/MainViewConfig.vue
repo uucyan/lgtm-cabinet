@@ -103,7 +103,33 @@ el-container.main
         br
         | ※ マークダウン形式にした場合、 "[![LGTM](https://hogehoge)](https://hogehoge)" の形式でコピーします
       el-select.input(v-model='theCatApiCopyFormat', @change="updateConfig('theCatApiCopyFormat', theCatApiCopyFormat)",  placeholder='選択')
-        el-option(v-for='item in theCatApiCopyFormatOption', :key='item.value', :label='item.label', :value='item.value')
+        el-option(v-for='item in copyFormatOption', :key='item.value', :label='item.label', :value='item.value')
+    div.margin-bottom-20px
+
+    div.config-title
+      i.el-icon-share
+      span TheDogAPI.com
+    div.form-item
+      label.form-label
+        | デフォルトの一度に取得する画像の枚数
+        br
+        | ※ 1枚 〜 27枚まで指定可能です
+      el-input-number.input(v-model='theDogApiDefaultLimit', @change="updateConfig('theDogApiDefaultLimit', theDogApiDefaultLimit)", :max="27", :min="1")
+      span.input-append-text 枚
+    div.form-item
+      label.form-label
+        | デフォルトの取得する画像の形式
+        br
+        | ※ 何も選択していない場合、すべての条件で検索されます
+      el-checkbox-group.input(v-model='theDogApiDefaultMimeTypes')
+        el-checkbox-button(v-for='mimeType in mimeTypeOptions', @change="updateConfig('theDogApiDefaultMimeTypes', theDogApiDefaultMimeTypes)", :label='mimeType', :key='mimeType') {{mimeType}}
+    div.form-item
+      label.form-label
+        | 画像のコピー形式
+        br
+        | ※ マークダウン形式にした場合、 "[![LGTM](https://hogehoge)](https://hogehoge)" の形式でコピーします
+      el-select.input(v-model='theDogApiCopyFormat', @change="updateConfig('theDogApiCopyFormat', theDogApiCopyFormat)",  placeholder='選択')
+        el-option(v-for='item in copyFormatOption', :key='item.value', :label='item.label', :value='item.value')
   reset-config-confirm-dialog(
     :message="resetConfirmMessage",
     @close="hideConfirmDialog"
@@ -133,6 +159,9 @@ export default
     theCatApiDefaultLimit: 9
     theCatApiDefaultMimeTypes: ['jpg', 'png', 'gif']
     theCatApiCopyFormat: 'markdown'
+    theDogApiDefaultLimit: 9
+    theDogApiDefaultMimeTypes: ['jpg', 'png', 'gif']
+    theDogApiCopyFormat: 'markdown'
     notificationPositionOptions: [
       {
         value: 'top-right'
@@ -171,7 +200,7 @@ export default
         label: '降順'
       },
     ]
-    theCatApiCopyFormatOption: [
+    copyFormatOption: [
       {
         value: 'markdown'
         label: 'マークダウン'
@@ -201,6 +230,9 @@ export default
       @theCatApiDefaultLimit = @config.theCatApiDefaultLimit
       @theCatApiDefaultMimeTypes = @config.theCatApiDefaultMimeTypes
       @theCatApiCopyFormat = @config.theCatApiCopyFormat
+      @theDogApiDefaultLimit = @config.theDogApiDefaultLimit
+      @theDogApiDefaultMimeTypes = @config.theDogApiDefaultMimeTypes
+      @theDogApiCopyFormat = @config.theDogApiCopyFormat
       # フォルダのソートを適用
       @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
 

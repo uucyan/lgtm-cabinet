@@ -19,6 +19,10 @@ export const state = () => ({
     theCatApiDefaultLimit: 9,
     theCatApiDefaultMimeTypes: ['jpg', 'png', 'gif'],
     theCatApiCopyFormat: 'markdown',
+    // TheDogAPI.com
+    theDogApiDefaultLimit: 9,
+    theDogApiDefaultMimeTypes: ['jpg', 'png', 'gif'],
+    theDogApiCopyFormat: 'markdown',
   },
   config: {}
 })
