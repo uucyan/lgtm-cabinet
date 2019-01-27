@@ -37,6 +37,12 @@ section.wood-grain-dark-brown
       )
         i.el-icon-picture-outline
         span TheCatAPI.com
+      el-menu-item(
+        index='3-2',
+        @click="select('theDogApi')"
+      )
+        i.el-icon-picture-outline
+        span TheDogAPI.com
     el-submenu(index='4')
       template(slot='title')
         span フォルダ

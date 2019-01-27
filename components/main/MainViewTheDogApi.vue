@@ -2,7 +2,7 @@
 el-container.main
   el-header.wood-grain-dark-brown.z-index-1(height='85px' style='padding: 20px 20px 0px 20px; filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));')
     div.display-table
-      a.header-element-left2.header-title.overflow-x-auto(href="https://thecatapi.com/" target="_blank") TheCatAPI.com
+      a.header-element-left2.header-title.overflow-x-auto(href="https://thedogapi.com/" target="_blank") TheDogAPI.com
       div.header-element-right2
         el-popover(placement='top', v-model='searchOptionVisible')
           div.form-item
@@ -22,7 +22,7 @@ el-container.main
           div.margin-bottom-20px
           div(style='text-align: right; margin: 0')
             el-button(type='text', @click='searchOptionVisible = false') 閉じる
-            el-button(type='primary', @click='getCatImages()') 画像の再取得
+            el-button(type='primary', @click='getDogImages()') 画像の再取得
             div.margin-bottom-10px
             p ※ 画像の取得は必ずランダムです
           div.margin-bottom-20px
@@ -71,7 +71,7 @@ import axios from 'axios'
 { clipboard } = require('electron')
 
 export default
-  name: 'MainViewTheCatApi'
+  name: 'MainViewTheDogApi'
   mixins: [ HandleResizeMixin ]
   data: ->
     images: []
@@ -86,19 +86,19 @@ export default
     isExistsImages: -> @images.length > 0
 
   created: ->
-    @limit = @config.theCatApiDefaultLimit
-    @mimeTypes = @config.theCatApiDefaultMimeTypes
-    @getCatImages()
+    @limit = @config.theDogApiDefaultLimit
+    @mimeTypes = @config.theDogApiDefaultMimeTypes
+    @getDogImages()
 
   methods:
-    # TheCatAPI から画像を取得
-    getCatImages: ->
+    # TheDogAPI から画像を取得
+    getDogImages: ->
       @loading = true
       @searchOptionVisible = false
       @images = []
-      axios.defaults.headers.common['x-api-key'] = '5c5955bc-4e22-4b18-b4a8-747a9622155d'
+      axios.defaults.headers.common['x-api-key'] = '0f1c7b58-c06d-4e6d-a2c1-ff1c2ef8424f'
       response = await axios.get(
-        'https://api.thecatapi.com/v1/images/search',
+        'https://api.thedogapi.com/v1/images/search',
         { params: { limit: @limit, size: "full", mime_types: @mimeTypes.join(','), order: 'Rand' } }
       )
       if response.status == 200 && response.data.length > 0
@@ -115,7 +115,7 @@ export default
 
     # 選択画像をクリップボードにコピー
     copyToClipboard:(image) ->
-      if @config.theCatApiCopyFormat == 'markdown'
+      if @config.theDogApiCopyFormat == 'markdown'
         copyText = "[![LGTM](#{image.url})](#{image.url})"
       else
         copyText = image.url

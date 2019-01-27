@@ -3,7 +3,8 @@ export const state = () => ({
   // フォルダ管理：folderManagement
   // 設定：config
   // フォルダ：folder
-  // TheCatAPI：theCatApi
+  // TheCatAPI.com：theCatApi
+  // TheDogAPI.com：theDogApi
   selectedMenu: '',
   // 設定を初期化確認ダイアログの表示フラグ
   resetConfigConfirmDialogVisible: false,
