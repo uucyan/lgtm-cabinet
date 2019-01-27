@@ -52,6 +52,16 @@ export default class Notification
       error:
         title: '失敗'
         message: '設定の初期化に失敗しました。'
+    external_service_connection:
+      success:
+        title: '成功'
+        message: '画像の取得に成功しました。'
+      warning:
+        title: '警告'
+        message: '外部サービスへの接続をしませんでした。'
+      error:
+        title: '失敗'
+        message: '外部サービスへの接続に失敗しました。'
 
   notify: (category, type, config, error = null) ->
     Vue.prototype.$notify

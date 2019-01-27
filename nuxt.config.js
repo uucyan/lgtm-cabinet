@@ -54,6 +54,9 @@ module.exports = { ...prodRouterBase,
         '@/assets/sass/variables/_color.sass',
       ]
     ],
+    '@nuxtjs/axios',
   ],
+  axios: {
+  },
   rootDir: __dirname
 }

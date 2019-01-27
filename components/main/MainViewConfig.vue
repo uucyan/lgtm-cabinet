@@ -22,10 +22,10 @@ el-container.main
       i.el-icon-menu
       span サイドバー
     div.form-item
-      label サイドバーに「LGTM Cabinet」を表示する
+      label.form-label サイドバーに「LGTM Cabinet」を表示する
       el-switch.input(v-model='sidebarShowTitle', @change="updateConfig('sidebarShowTitle', sidebarShowTitle)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.form-item
-      label アプリの起動時にサイドバーのフォルダタブを展開した状態にする
+      label.form-label アプリの起動時にサイドバーのフォルダタブを展開した状態にする
       el-switch.input(v-model='sidebarFileTabOpen', @change="updateConfig('sidebarFileTabOpen', sidebarFileTabOpen)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 
@@ -33,13 +33,13 @@ el-container.main
       i.el-icon-picture
       span 画像一覧
     div.form-item
-      label
+      label.form-label
         | 画像一覧に GIF 形式の画像を表示する
         br
         | ※ GIF 形式の画像はコピーできません
       el-switch.input(v-model='imageListShowGifImage', @change="updateConfig('imageListShowGifImage', imageListShowGifImage)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.form-item
-      label 画像一覧を表示するファルダを切り替えた際に、スクロールの位置を保持する
+      label.form-label 画像一覧を表示するファルダを切り替えた際に、スクロールの位置を保持する
       el-switch.input(v-model='imageListKeepScrollPosition', @change="updateConfig('imageListKeepScrollPosition', imageListKeepScrollPosition)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 
@@ -47,21 +47,21 @@ el-container.main
       i.el-icon-bell
       span 通知
     div.form-item
-      label
+      label.form-label
         | 通知の位置
         br
         | ※ フォルダの管理や画像のコピー時に行う通知です
       el-select.input(v-model='notificationPosition', @change="updateConfig('notificationPosition', notificationPosition)",  placeholder='選択')
         el-option(v-for='item in notificationPositionOptions', :key='item.value', :label='item.label', :value='item.value')
     div.form-item
-      label
+      label.form-label
         | 通知の表示時間
         br
         | ※ 0.1 〜 10.0 秒まで指定可能です
       el-input-number.input(v-model='notificationDuration', @change="updateConfig('notificationDuration', notificationDuration)", :precision="1", :step="0.1", :max="10", :min="0.1")
       span.input-append-text 秒
     div.form-item
-      label 設定の変更時に通知をする
+      label.form-label 設定の変更時に通知をする
       el-switch.input(v-model='notificationConfigUpdateNotify', @change="updateConfig('notificationConfigUpdateNotify', notificationConfigUpdateNotify)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 
@@ -69,7 +69,7 @@ el-container.main
       i.el-icon-message
       span フォルダ
     div.form-item
-      label
+      label.form-label
         | フォルダのソート順
         br
         | ※ サイドバーとフォルダ管理に表示するフォルダの順番を設定できます
@@ -78,6 +78,32 @@ el-container.main
       span.input-append-text の
       el-select.input(v-model='folderSortOrder', @change="updateConfig('folderSortOrder', folderSortOrder)",  placeholder='選択')
         el-option(v-for='item in folderSortOrderOption', :key='item.value', :label='item.label', :value='item.value')
+    div.margin-bottom-20px
+
+    div.config-title
+      i.el-icon-share
+      span TheCatAPI.com
+    div.form-item
+      label.form-label
+        | デフォルトの一度に取得する画像の枚数
+        br
+        | ※ 1枚 〜 27枚まで指定可能です
+      el-input-number.input(v-model='theCatApiDefaultLimit', @change="updateConfig('theCatApiDefaultLimit', theCatApiDefaultLimit)", :max="27", :min="1")
+      span.input-append-text 枚
+    div.form-item
+      label.form-label
+        | デフォルトの取得する画像の形式
+        br
+        | ※ 何も選択していない場合、すべての条件で検索されます
+      el-checkbox-group.input(v-model='theCatApiDefaultMimeTypes')
+        el-checkbox-button(v-for='mimeType in mimeTypeOptions', @change="updateConfig('theCatApiDefaultMimeTypes', theCatApiDefaultMimeTypes)", :label='mimeType', :key='mimeType') {{mimeType}}
+    div.form-item
+      label.form-label
+        | 画像のコピー形式
+        br
+        | ※ マークダウン形式にした場合、 "[![LGTM](https://hogehoge)](https://hogehoge)" の形式でコピーします
+      el-select.input(v-model='theCatApiCopyFormat', @change="updateConfig('theCatApiCopyFormat', theCatApiCopyFormat)",  placeholder='選択')
+        el-option(v-for='item in theCatApiCopyFormatOption', :key='item.value', :label='item.label', :value='item.value')
   reset-config-confirm-dialog(
     :message="resetConfirmMessage",
     @close="hideConfirmDialog"
@@ -104,6 +130,9 @@ export default
     notificationConfigUpdateNotify: true
     folderSortTagetColmun: 'createdAt'
     folderSortOrder: 1
+    theCatApiDefaultLimit: 9
+    theCatApiDefaultMimeTypes: ['jpg', 'png', 'gif']
+    theCatApiCopyFormat: 'markdown'
     notificationPositionOptions: [
       {
         value: 'top-right'
@@ -142,6 +171,17 @@ export default
         label: '降順'
       },
     ]
+    theCatApiCopyFormatOption: [
+      {
+        value: 'markdown'
+        label: 'マークダウン'
+      },
+      {
+        value: 'url'
+        label: 'URL'
+      },
+    ]
+    mimeTypeOptions: ['jpg', 'png', 'gif']
     resetConfirmMessage: ''
 
   computed:
@@ -158,6 +198,9 @@ export default
       @notificationConfigUpdateNotify = @config.notificationConfigUpdateNotify
       @folderSortTagetColmun = @config.folderSortTagetColmun
       @folderSortOrder = @config.folderSortOrder
+      @theCatApiDefaultLimit = @config.theCatApiDefaultLimit
+      @theCatApiDefaultMimeTypes = @config.theCatApiDefaultMimeTypes
+      @theCatApiCopyFormat = @config.theCatApiCopyFormat
       # フォルダのソートを適用
       @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
 
@@ -192,7 +235,7 @@ export default
 </script>
 
 <style lang="sass" scoped>
-label
+.form-label
   padding-right: 1.5em
   width: 80%
 
