@@ -15,6 +15,10 @@ export const state = () => ({
     // フォルダ
     folderSortTagetColmun: 'createdAt',
     folderSortOrder: 1,  // 昇順：1, 降順：-1
+    // TheCatAPI.com
+    theCatApiDefaultLimit: 9,
+    theCatApiDefaultMimeTypes: ['jpg', 'png', 'gif'],
+    theCatApiCopyFormat: 'markdown',
   },
   config: {}
 })

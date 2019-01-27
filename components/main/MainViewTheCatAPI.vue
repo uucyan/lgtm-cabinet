@@ -4,16 +4,19 @@ el-container.main
     div.display-table
       p.header-element-left2.header-title.overflow-x-auto TheCatAPI.com
       div.header-element-right2
-        el-popover(placement='top', width='500', v-model='searchOptionVisible')
+        el-popover(placement='top', v-model='searchOptionVisible')
           div.form-item
             label.form-label
               | 一度に取得する画像の枚数
               br
               | ※ 1枚 〜 27枚まで指定可能です
             el-input-number.input(v-model='limit', :max="27", :min="1")
+            span.input-append-text 枚
           div.form-item
             label.form-label
               | 取得する画像の形式
+              br
+              | ※ 何も選択していない場合、すべての条件で検索されます
             el-checkbox-group.input(v-model='mimeTypes')
               el-checkbox-button(v-for='mimeType in mimeTypeOptions', :label='mimeType', :key='mimeType') {{mimeType}}
           div.margin-bottom-20px
@@ -24,7 +27,7 @@ el-container.main
             p ※ 画像の取得は必ずランダムです
           div.margin-bottom-20px
           el-button(
-            v-if="windowWidthSize > 770"
+            v-if="windowWidthSize > 830"
             slot='reference'
             icon='el-icon-search'
             style='background: transparent; color: #ffffff;'
@@ -37,7 +40,7 @@ el-container.main
             style='background: transparent; color: #ffffff;'
           )
 
-      div.header-element-right2(v-if="windowWidthSize > 770", style='width: 160px;')
+      div.header-element-right2(v-if="windowWidthSize > 830", style='width: 160px;')
         el-button(
           icon='el-icon-printer'
           @click="randomSelectImage()"
@@ -82,7 +85,10 @@ export default
     config: -> @$store.state.config.config
     isExistsImages: -> @images.length > 0
 
-  created: -> @getCatImages()
+  created: ->
+    @limit = @config.theCatApiDefaultLimit
+    @mimeTypes = @config.theCatApiDefaultMimeTypes
+    @getCatImages()
 
   methods:
     # TheCatAPI から画像を取得
@@ -109,7 +115,11 @@ export default
 
     # 選択画像をクリップボードにコピー
     copyToClipboard:(image) ->
-      clipboard.writeText("[![LGTM](#{image.url})](#{image.url})")
+      if @config.theCatApiCopyFormat == 'markdown'
+        copyText = "[![LGTM](#{image.url})](#{image.url})"
+      else
+        copyText = image.url
+      clipboard.writeText(copyText)
       @sendNotification('copy_image', 'success')
 
     # 通知を送信
@@ -150,6 +160,11 @@ export default
 .form-label
   padding-right: 1.5em
   width: 80%
+
+.input-append-text
+  margin-top: auto
+  margin-left: 10px
+  margin-right: 10px
 
 ul
   padding: 0px
