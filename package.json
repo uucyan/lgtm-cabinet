@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=DEV electron ./main.js",
-    "build": "nuxt generate && cp main.js dist/electron/ && cp nuxt.config.js dist/electron/ && electron-builder"
+    "build": "nuxt generate && cp main.js dist/electron/ && cp nuxt.config.js dist/electron/ && electron-builder -mw"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",

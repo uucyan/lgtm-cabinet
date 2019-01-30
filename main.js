@@ -39,8 +39,9 @@ const app = electron.app
 const globalShortcut = electron.globalShortcut
 
 const newWin = () => {
+  const iconPath = process.platform === 'win32' ? 'static/icon.ico' : 'static/icon.icns'
   win = new electron.BrowserWindow({
-    icon: path.join(__dirname, 'static/icon.icns'),
+    icon: path.join(__dirname, iconPath),
     width: 1500,
     height: 1000,
     // backgroundColor: '#573216'
