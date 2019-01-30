@@ -54,8 +54,9 @@ export const actions = {
 
   // フォルダをDBに保存して一覧を更新
   insert({ dispatch }, params) {
+    const splitText = process.platform === 'win32' ? '\\' : '/'
     let doc = {
-      name: params.folderPath.split('/').pop(),
+      name: params.folderPath.split(splitText).pop(),
       path: params.folderPath,
     }
     Vue.prototype.$db.folders.insert(doc, (error, newDoc) => {
