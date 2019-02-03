@@ -43,7 +43,9 @@ el-dialog(
     p 残念ながら GIF 画像のコピーには対応できておりません。
     p これは技術的な問題です。
     p
-      | Electron が提供する
+      a(href="https://electronjs.org/" target="_blank") Electron
+      |
+      | が提供する
       |
       a(href="https://electronjs.org/docs/api/clipboard" target="_blank") clipboard
       |
