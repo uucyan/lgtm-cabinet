@@ -11,7 +11,7 @@ module.exports = { ...prodRouterBase,
     meta: [
       { charset: 'utf-8' }
     ]
-   }, // Headers of the page
+  }, // Headers of the page
   loading: false, // Disable default loading bar
   generate: {
     dir: 'dist/electron'
