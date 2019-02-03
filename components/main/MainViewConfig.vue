@@ -31,7 +31,7 @@ el-container.main
 
     div.config-title
       i.el-icon-picture
-      span 画像一覧
+      span 画像一覧（フォルダ）
     div.form-item
       label.form-label
         | 画像一覧に GIF 形式の画像を表示する

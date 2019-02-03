@@ -24,7 +24,7 @@ export default class Notification
         message: 'フォルダの追加に失敗しました。'
       warning:
         title: '警告'
-        message: 'フォルダを追加をしませんでした。'
+        message: 'フォルダを追加しませんでした。'
     delete_folder:
       success:
         title: '成功'
