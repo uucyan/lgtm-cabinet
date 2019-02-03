@@ -1,5 +1,7 @@
 <img width="2000" alt="lgtm cabinet readme logo" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
-  
+
+[![CircleCI](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master.svg?style=svg)](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master)
+
 ## LGTM Cabinet とは*
 自分が保存している画像を簡単に LGTM 画像として利用できるようにするための画像管理アプリです。  
 ローカル PC 内にあるフォルダ（ディレクトリ）から画像を一覧表示し、その中から簡単に画像をクリップボードへコピーすることが可能です。
