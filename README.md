@@ -1,6 +1,7 @@
 <div style="text-align: center;">
   <img width="691" alt="lgtm cabinet readme logo" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
 </div>
+<img width="2000" alt="lgtm cabinet readme logo" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
 <img width="1291" alt="lgtm cabinet readme logo2" src="https://user-images.githubusercontent.com/19953599/52173094-1883b680-27c0-11e9-805c-83aca2142879.png">
 
 ## LGTM Cabinet とは*
