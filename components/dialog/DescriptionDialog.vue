@@ -20,13 +20,21 @@ el-dialog(
       i.el-icon-star-on
     h3 主な機能
     ul.border
-      li フォルダ（ディレクトリ）をアプリ内に登録/削除
-      li 登録したフォルダ（ディレクトリ）を、サイドバーに一覧表示
-      li ローカル PC 内にあるフォルダ（ディレクトリ）内にある画像を一覧表示
-      li 一覧表示された画像をクリックするだけで、その画像をクリップボードへコピー
-      li 一覧表示された画像の中から、ランダムで一つの画像をクリップボードへコピー
+      li ローカルフォルダにある画像を簡単にコピーできる
+      li
+        | 外部サービスの
+        |
+        a(href="https://thecatapi.com/" target="_blank") TheCatAPI.com
+        |
+        | から画像を取得し、マークダウンまたは URL 形式で簡単にコピーできる
+      li
+        | 外部サービスの
+        |
+        a(href="https://thedogapi.com/" target="_blank") TheDogAPI.com
+        |
+        | から画像を取得し、マークダウンまたは URL 形式で簡単にコピーできる
     div.margin-bottom-20px
-    h3 画像のサポート形式
+    h3 ローカルフォルダにある画像のサポート形式
     ul.border
       li PNG
       li JPEG
@@ -45,6 +53,7 @@ el-dialog(
       |
       | が GIF 形式の画像をサポートしていないため実現できませんでした。
     p いつかサポートされたら対応したいと思います。
+    p ※ 外部サービスから取得した GIF 形式の画像はコピー可能です。
     div.margin-bottom-20px
 
     h2 今後
@@ -53,12 +62,6 @@ el-dialog(
     p 期待せず待っていてください。
     div.margin-bottom-10px
     ul.border
-      li
-        a(href="https://www.lgtm.in/" target="_blank") LGTM.in
-        |
-        | の画像からもコピーできるようにする
-      ul.nest
-        li ただし、 LGTM.in がサービスを終了するのかどうかよくわからない状況なので、様子を見る
       li 画像の編集機能
       ul.nest
         li 「LGTM」などのテキストを画像に加えれるようにする

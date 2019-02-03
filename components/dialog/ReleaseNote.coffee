@@ -3,9 +3,9 @@ export default class ReleaseNote
   # 新しいリリース情報は上に足してく
   NOTES = [
     {
-      version: '0.0.1'
+      version: '1.0.0'
       update_details: [
-        'β版リリース！'
+        'バージョン 1.0.0 リリース！！'
       ]
     },
   ]
