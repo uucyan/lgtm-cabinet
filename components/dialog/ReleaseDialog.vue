@@ -52,7 +52,7 @@ p
   line-height: 1.5
 
 a
-  color: #573216
+  color: $color-dark-brown
 
 ul
   padding: 0.5em 0 0.5em 1.5em
@@ -63,12 +63,6 @@ ul.nest
 
 ul li
   padding: 0.5em 0
-
-.margin-bottom-10px
-  margin-bottom: 10px
-
-.margin-bottom-20px
-  margin-bottom: 20px
 
 .padding-left-10px
   padding-left: 10px

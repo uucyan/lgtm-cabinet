@@ -268,7 +268,7 @@ export default
 
 <style lang="sass" scoped>
 .main-text-color
-  color: #606266
+  color: $color-text-gray
 
 .form-label
   padding-right: 1.5em
@@ -288,14 +288,11 @@ i
 
 .form-item
   display: flex
-  border-bottom: solid #573216 1px
+  border-bottom: solid $color-dark-brown 1px
   padding: 1.5em 0 0.5em 1.5em
 
 .input-append-text
   margin-top: auto
   margin-left: 10px
   margin-right: 10px
-
-.margin-bottom-20px
-  margin-bottom: 20px
 </style>

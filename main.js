@@ -44,7 +44,7 @@ const newWin = () => {
     icon: path.join(__dirname, iconPath),
     width: 1500,
     height: 1000,
-    // backgroundColor: '#573216'
+    // backgroundColor: '$color-dark-brown'
   })
   win.on('closed', () => win = null)
 

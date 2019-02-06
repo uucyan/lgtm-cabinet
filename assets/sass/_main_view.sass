@@ -1,0 +1,94 @@
+// MainView コンポーネントの共通的なスタイル
+.main
+  height: 100vh
+  overflow-y: auto
+
+/////////////////////////////////////
+// 外部サービス以外のヘッダー
+/////////////////////////////////////
+.header-title
+  color: $color-white
+  white-space: nowrap
+  position: relative
+  margin-right: 20px
+  font-size: 40px
+
+.header-element-left
+  float: left; width: 80%;
+
+.header-element-right
+  float: right; text-align: right; width: 20%;
+
+/////////////////////////////////////
+// 外部サービスのヘッダー
+/////////////////////////////////////
+.display-table
+  display: table
+  width: 100%
+
+.header-element-left2
+  display: table-cell
+  vertical-align: middle
+
+.header-element-right2
+  display: table-cell
+  vertical-align: middle
+  text-align: right
+
+/////////////////////////////////////
+// 取得条件欄
+/////////////////////////////////////
+.input
+  width: 300px
+  margin-top: auto
+
+.form-item
+  display: flex
+  border-bottom: solid $color-dark-brown 1px
+  padding: 1.5em 0 0.5em 1.5em
+
+.form-label
+  padding-right: 1.5em
+  width: 80%
+
+.input-append-text
+  margin-top: auto
+  margin-left: 10px
+  margin-right: 10px
+
+/////////////////////////////////////
+// 画像リスト
+/////////////////////////////////////
+img
+  cursor: pointer
+
+ul.itemlist
+  padding: 0px
+
+.itemlist
+  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
+  margin: 0 auto
+  li
+    list-style: none
+    float: left
+    width: 33.333333%
+    padding: 10px
+    &:nth-child(3n+1)
+      clear: left
+  img
+    width: 100%
+    height: auto
+
+@media screen and (max-width: 1300px)
+  .itemlist li
+    width: 50%
+    &:nth-child(2n+1)
+      clear: left
+    &:nth-child(3n+1)
+      clear: none
+
+@media screen and (max-width: 1000px)
+  .itemlist li
+    width: 100%
+    &:nth-child(2n+1)
+      clear: none
