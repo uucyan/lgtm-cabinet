@@ -17,7 +17,7 @@ el-container.main
         @click="showConfirmDialog"
         style='background: transparent; color: #ffffff;'
       )
-  el-main.wood-grain-white.z-index-0
+  el-main.wood-grain-white.z-index-0.main-text-color
     div.config-title
       i.el-icon-menu
       span サイドバー
@@ -267,6 +267,9 @@ export default
 </script>
 
 <style lang="sass" scoped>
+.main-text-color
+  color: #606266
+
 .form-label
   padding-right: 1.5em
   width: 80%
