@@ -1,19 +1,19 @@
 <template lang="pug">
 article
   the-sidebar
-  the-main-view
+  main-view
 </template>
 
 <script lang="coffee">
 import TheSidebar from '~/components/TheSidebar.vue'
-import TheMainView from '~/components/TheMainView.vue'
+import MainView from '~/components/MainView.vue'
 
 export default
   name: 'Index'
 
   components:
     'the-sidebar': TheSidebar
-    'the-main-view': TheMainView
+    'main-view': MainView
 
   computed:
     config: -> @$store.state.config.config
