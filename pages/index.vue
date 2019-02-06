@@ -20,11 +20,7 @@ export default
 
   created: ->
     @$store.dispatch('config/find', false)
-    setTimeout(@findAllFolders, 500)
-
-  methods:
-    findAllFolders: ->
-      @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
+    @$store.dispatch('folders/findAll', {config: @config, isUpdate: false})
 </script>
 
 <style lang="sass" scoped>

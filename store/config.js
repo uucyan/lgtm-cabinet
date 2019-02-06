@@ -38,10 +38,10 @@ export const mutations = {
 }
 
 export const actions = {
-  find({ state, commit }, isUpdate) {
+  async find({ state, commit }, isUpdate) {
     // データが1件も存在していなければ、デフォルトの設定値をセット
     // そうでなければ DB から取得したデータをセット
-    Vue.prototype.$db.config.count({}, ((error, count) => {
+    await Vue.prototype.$db.config.count({}, ((error, count) => {
       if (count == 0) {
         commit('set', { config: {}, isDefault: true })
         if (isUpdate && state.config.notificationConfigUpdateNotify) {
