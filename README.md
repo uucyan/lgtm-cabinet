@@ -1,6 +1,8 @@
-<img width="2000" alt="lgtm cabinet readme logo" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
+<img width="2000" alt="LGTM Cabinet" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
 
 [![CircleCI](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master.svg?style=svg)](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master)
+![Platform-macOS](https://img.shields.io/badge/-macOS-744d30.svg?style=flat&logo=apple)
+![Platform-Windows](https://img.shields.io/badge/-Windows-744d30.svg?style=flat&logo=windows)
 
 ## LGTM Cabinet とは*
 自分が保存している画像を簡単に LGTM 画像として利用できるようにするための画像管理アプリです。  
