@@ -22,16 +22,18 @@ el-container.main
   el-main.wood-grain-white(id='image-list')
     ul.itemlist.z-index-0(v-if="!isDev")
       li(v-for="image in images")
-        img(
-          :src="image"
-          @click="copyToClipboard(image)"
-        )
+        el-tooltip(content='クリックでコピー！', placement='top', effect='light', :disabled="!config.imageListShowTooltip")
+          img(
+            :src="image"
+            @click="copyToClipboard(image)"
+          )
     //- mock用
     ul.itemlist.z-index-0(v-if="isDev")
       li(v-for="n in 12")
-        img(
-          src="~assets/img/logo.png"
-        )
+        el-tooltip(content='クリックでコピー！', placement='top', effect='light', :disabled="!config.imageListShowTooltip")
+          img(
+            src="~assets/img/logo.png"
+          )
 </template>
 
 <script lang="coffee">

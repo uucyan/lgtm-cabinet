@@ -41,6 +41,12 @@ el-container.main
     div.form-item
       label.form-label 画像一覧を表示するファルダを切り替えた際に、スクロールの位置を保持する
       el-switch.input(v-model='imageListKeepScrollPosition', @change="updateConfig('imageListKeepScrollPosition', imageListKeepScrollPosition)", active-text='する', inactive-text='しない' active-color="#744d30")
+    div.form-item
+      label.form-label
+        | 画像のマウスホバー時にツールチップを表示する
+        br
+        | ※ 外部サービスの画像一覧も対象です
+      el-switch.input(v-model='imageListShowTooltip', @change="updateConfig('imageListShowTooltip', imageListShowTooltip)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 
     div.config-title
@@ -150,6 +156,7 @@ export default
     # 画像一覧
     imageListShowGifImage: true
     imageListKeepScrollPosition: false
+    imageListShowTooltip: true
     # 通知
     notificationPosition: 'bottom-right'
     notificationDuration: 4.5
@@ -222,6 +229,7 @@ export default
       @sidebarFileTabOpen = @config.sidebarFileTabOpen
       @imageListShowGifImage = @config.imageListShowGifImage
       @imageListKeepScrollPosition = @config.imageListKeepScrollPosition
+      @imageListShowTooltip = @config.imageListShowTooltip
       @notificationPosition = @config.notificationPosition
       @notificationDuration = @config.notificationDuration
       @notificationConfigUpdateNotify = @config.notificationConfigUpdateNotify

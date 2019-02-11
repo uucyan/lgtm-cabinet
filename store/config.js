@@ -8,6 +8,7 @@ export const state = () => ({
     // 画像一覧
     imageListShowGifImage: false,
     imageListKeepScrollPosition: false,
+    imageListShowTooltip: true,
     // 通知
     notificationPosition: 'bottom-right',
     notificationDuration: 4.5,

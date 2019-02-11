@@ -58,10 +58,11 @@ el-container.main
   el-main.wood-grain-white(id='image-list', v-loading="loading")
     ul.itemlist.z-index-0
       li(v-for="image in images")
-        img(
-          :src="image.url"
-          @click="copyToClipboard(image)"
-        )
+        el-tooltip(content='クリックでコピー！', placement='top', effect='light', :disabled="!config.imageListShowTooltip")
+          img(
+            :src="image.url"
+            @click="copyToClipboard(image)"
+          )
 </template>
 
 <script lang="coffee">
