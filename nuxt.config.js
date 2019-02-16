@@ -12,7 +12,12 @@ module.exports = { ...prodRouterBase,
       { charset: 'utf-8' }
     ]
   }, // Headers of the page
-  loading: false, // Disable default loading bar
+  // loading: false, // Disable default loading bar
+  loadingIndicator: {
+    name: 'folding-cube',
+    color: '#573216',
+    background: 'white'
+  },
   generate: {
     dir: 'dist/electron'
   },
