@@ -54,17 +54,24 @@ export const actions = {
 
   // フォルダをDBに保存して一覧を更新
   insert({ dispatch }, params) {
-    const splitText = process.platform === 'win32' ? '\\' : '/'
-    let doc = {
-      name: params.folderPath.split(splitText).pop(),
-      path: params.folderPath,
-    }
-    Vue.prototype.$db.folders.insert(doc, (error, newDoc) => {
-      if (error == null) {
-        dispatch('findAll', {isUpdate: true, notificationType: 'add_folder', config: params.config})
-      } else {
-        Vue.prototype.$services.notification.notify('add_folder', 'error', params.config, error)
+    Vue.prototype.$db.folders.count({ path: params.folderPath }, (error, count) => {
+      // 既に登録済みの場合は登録しない
+      if (count != 0) {
+        Vue.prototype.$services.notification.notify('add_folder', 'error2', params.config)
+        return
       }
+      const splitText = process.platform === 'win32' ? '\\' : '/'
+      let doc = {
+        name: params.folderPath.split(splitText).pop(),
+        path: params.folderPath,
+      }
+      Vue.prototype.$db.folders.insert(doc, (error, newDoc) => {
+        if (error == null) {
+          dispatch('findAll', {isUpdate: true, notificationType: 'add_folder', config: params.config})
+        } else {
+          Vue.prototype.$services.notification.notify('add_folder', 'error', params.config, error)
+        }
+      })
     })
   },
 

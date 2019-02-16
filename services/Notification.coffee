@@ -22,6 +22,9 @@ export default class Notification
       error:
         title: '失敗'
         message: 'フォルダの追加に失敗しました。'
+      error2:
+        title: '失敗'
+        message: '既に登録済みのファルダです。'
       warning:
         title: '警告'
         message: 'フォルダを追加しませんでした。'
@@ -65,7 +68,7 @@ export default class Notification
 
   notify: (category, type, config, error = null) ->
     Vue.prototype.$notify
-      type: type
+      type: type.replace(/\d+/g, '')
       position: config.notificationPosition
       duration: config.notificationDuration * 1000
       customClass: 'my-notification'
