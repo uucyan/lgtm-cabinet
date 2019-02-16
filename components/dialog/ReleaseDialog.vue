@@ -33,9 +33,9 @@ export default
     activeName: '1'
     ReleaseNote: new ReleaseNote
   computed:
-    releaseDialogVisible: -> @$store.state.state.releaseDialogVisible
+    releaseDialogVisible: -> @$store.state.app.releaseDialogVisible
   methods:
-    close: -> @$store.commit('state/releaseDialogVisible', false)
+    close: -> @$store.commit('app/releaseDialogVisible', false)
 </script>
 
 <style lang="sass" scoped>
@@ -52,7 +52,7 @@ p
   line-height: 1.5
 
 a
-  color: #573216
+  color: $color-dark-brown
 
 ul
   padding: 0.5em 0 0.5em 1.5em
@@ -63,12 +63,6 @@ ul.nest
 
 ul li
   padding: 0.5em 0
-
-.margin-bottom-10px
-  margin-bottom: 10px
-
-.margin-bottom-20px
-  margin-bottom: 20px
 
 .padding-left-10px
   padding-left: 10px

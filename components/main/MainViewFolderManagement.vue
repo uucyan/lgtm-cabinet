@@ -70,7 +70,7 @@ export default
     deleteConfirmMessage: ''
   computed:
     folders: -> @$store.state.folders.list
-    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.app.deleteFolderConfirmDialogVisible
     config: -> @$store.state.config.config
   methods:
     showOpenFolderSelectDialog: ->
@@ -89,10 +89,10 @@ export default
     showConfirmDialog:(folder) ->
       @deleteTargetFolder = folder
       @deleteConfirmMessage = folder.name + "フォルダを削除しますか？\n※ 実際のフォルダは削除されません"
-      @$store.commit('state/deleteFolderConfirmDialogVisible', true)
+      @$store.commit('app/deleteFolderConfirmDialogVisible', true)
 
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/deleteFolderConfirmDialogVisible', false)
+      @$store.commit('app/deleteFolderConfirmDialogVisible', false)
       if isOk is true
         @deleteFolder(@deleteTargetFolder)
       else

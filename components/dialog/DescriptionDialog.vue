@@ -90,9 +90,9 @@ import ChangeStyleMixin from "~/components/dialog/ChangeStyleMixin.coffee"
 export default
   mixins: [ ChangeStyleMixin ]
   computed:
-    descriptionDialogVisible: -> @$store.state.state.descriptionDialogVisible
+    descriptionDialogVisible: -> @$store.state.app.descriptionDialogVisible
   methods:
-    close:() -> @$store.commit('state/descriptionDialogVisible', false)
+    close:() -> @$store.commit('app/descriptionDialogVisible', false)
 </script>
 
 <style lang="sass" scoped>
@@ -109,11 +109,11 @@ p
   line-height: 1.5
 
 a
-  color: #573216
+  color: $color-dark-brown
 
 ul.border
-  border-top: solid #573216 1px
-  border-bottom: solid #573216 1px
+  border-top: solid $color-dark-brown 1px
+  border-bottom: solid $color-dark-brown 1px
   padding: 0.5em 0 0.5em 1.5em
 
 ul.nest
@@ -122,10 +122,4 @@ ul.nest
 
 ul li
   padding: 0.5em 0
-
-.margin-bottom-10px
-  margin-bottom: 10px
-
-.margin-bottom-20px
-  margin-bottom: 20px
 </style>

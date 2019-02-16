@@ -44,7 +44,7 @@ module.exports = { ...prodRouterBase,
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
-    '@/assets/sass/global.sass',
+    '@/assets/sass/style.sass',
     'element-ui/lib/theme-chalk/index.css',
   ],
   modules: [

@@ -22,16 +22,18 @@ el-container.main
   el-main.wood-grain-white(id='image-list')
     ul.itemlist.z-index-0(v-if="!isDev")
       li(v-for="image in images")
-        img(
-          :src="image"
-          @click="copyToClipboard(image)"
-        )
+        el-tooltip(content='クリックでコピー！', placement='top', effect='light', :disabled="!config.imageListShowTooltip")
+          img(
+            :src="image"
+            @click="copyToClipboard(image)"
+          )
     //- mock用
     ul.itemlist.z-index-0(v-if="isDev")
       li(v-for="n in 12")
-        img(
-          src="~assets/img/logo.png"
-        )
+        el-tooltip(content='クリックでコピー！', placement='top', effect='light', :disabled="!config.imageListShowTooltip")
+          img(
+            src="~assets/img/logo.png"
+          )
 </template>
 
 <script lang="coffee">
@@ -45,19 +47,22 @@ export default
   mixins: [ HandleResizeMixin ]
   data: ->
     isDev: process.env.NODE_ENV == 'development'
+
   computed:
     images: -> @$store.state.folders.images
     folderName: -> @$store.state.folders.selectFolderName
     isExistsImages: -> @$store.getters['folders/isExistsImages']
     config: -> @$store.state.config.config
   watch:
-     images: -> @scrollTop()
+    images: -> @scrollTop()
+
   methods:
     # 画像をランダムで選択
     randomCopy: ->
       if !@isExistsImages
         return @sendNotification('warning')
       @copyToClipboard @images[Math.floor(Math.random() * Math.floor(@images.length))]
+
     # 選択画像をクリップボードにコピー
     copyToClipboard:(path) ->
       image = nativeImage.createFromPath(path)
@@ -65,9 +70,12 @@ export default
         return @sendNotification('error')
       clipboard.writeImage(image)
       @sendNotification('success')
+
     # 画面上部にメッセージを表示
     sendNotification:(type) ->
       @$services.notification.notify('copy_image', type, @config)
+
+    # スクロールをトップにする
     scrollTop: ->
       return if @config.imageListKeepScrollPosition
       element = document.getElementById('image-list')
@@ -75,34 +83,4 @@ export default
 </script>
 
 <style lang="sass" scoped>
-ul
-  padding: 0px
-
-.itemlist
-  filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5))
-  margin: 0 auto
-  li
-    list-style: none
-    float: left
-    width: 33.333333%
-    padding: 10px
-    &:nth-child(3n+1)
-      clear: left
-  img
-    width: 100%
-    height: auto
-
-@media screen and (max-width: 1300px)
-  .itemlist li
-    width: 50%
-    &:nth-child(2n+1)
-      clear: left
-    &:nth-child(3n+1)
-      clear: none
-
-@media screen and (max-width: 1000px)
-  .itemlist li
-    width: 100%
-    &:nth-child(2n+1)
-      clear: none
 </style>

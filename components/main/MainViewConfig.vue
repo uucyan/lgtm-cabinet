@@ -17,7 +17,7 @@ el-container.main
         @click="showConfirmDialog"
         style='background: transparent; color: #ffffff;'
       )
-  el-main.wood-grain-white.z-index-0
+  el-main.wood-grain-white.z-index-0.main-text-color
     div.config-title
       i.el-icon-menu
       span サイドバー
@@ -41,6 +41,12 @@ el-container.main
     div.form-item
       label.form-label 画像一覧を表示するファルダを切り替えた際に、スクロールの位置を保持する
       el-switch.input(v-model='imageListKeepScrollPosition', @change="updateConfig('imageListKeepScrollPosition', imageListKeepScrollPosition)", active-text='する', inactive-text='しない' active-color="#744d30")
+    div.form-item
+      label.form-label
+        | 画像のマウスホバー時にツールチップを表示する
+        br
+        | ※ 外部サービスの画像一覧も対象です
+      el-switch.input(v-model='imageListShowTooltip', @change="updateConfig('imageListShowTooltip', imageListShowTooltip)", active-text='する', inactive-text='しない' active-color="#744d30")
     div.margin-bottom-20px
 
     div.config-title
@@ -150,6 +156,7 @@ export default
     # 画像一覧
     imageListShowGifImage: true
     imageListKeepScrollPosition: false
+    imageListShowTooltip: true
     # 通知
     notificationPosition: 'bottom-right'
     notificationDuration: 4.5
@@ -222,6 +229,7 @@ export default
       @sidebarFileTabOpen = @config.sidebarFileTabOpen
       @imageListShowGifImage = @config.imageListShowGifImage
       @imageListKeepScrollPosition = @config.imageListKeepScrollPosition
+      @imageListShowTooltip = @config.imageListShowTooltip
       @notificationPosition = @config.notificationPosition
       @notificationDuration = @config.notificationDuration
       @notificationConfigUpdateNotify = @config.notificationConfigUpdateNotify
@@ -248,11 +256,11 @@ export default
     # 確認ダイアログの表示
     showConfirmDialog: ->
       @resetConfirmMessage = "設定を初期状態に戻しますか？"
-      @$store.commit('state/resetConfigConfirmDialogVisible', true)
+      @$store.commit('app/resetConfigConfirmDialogVisible', true)
 
     # 確認ダイアログを閉じる
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/resetConfigConfirmDialogVisible', false)
+      @$store.commit('app/resetConfigConfirmDialogVisible', false)
       if isOk is true
         @resetConfig()
       else
@@ -267,6 +275,9 @@ export default
 </script>
 
 <style lang="sass" scoped>
+.main-text-color
+  color: $color-text-gray
+
 .form-label
   padding-right: 1.5em
   width: 80%
@@ -285,14 +296,11 @@ i
 
 .form-item
   display: flex
-  border-bottom: solid #573216 1px
+  border-bottom: solid $color-dark-brown 1px
   padding: 1.5em 0 0.5em 1.5em
 
 .input-append-text
   margin-top: auto
   margin-left: 10px
   margin-right: 10px
-
-.margin-bottom-20px
-  margin-bottom: 20px
 </style>

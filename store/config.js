@@ -8,6 +8,7 @@ export const state = () => ({
     // 画像一覧
     imageListShowGifImage: false,
     imageListKeepScrollPosition: false,
+    imageListShowTooltip: true,
     // 通知
     notificationPosition: 'bottom-right',
     notificationDuration: 4.5,
@@ -38,10 +39,10 @@ export const mutations = {
 }
 
 export const actions = {
-  find({ state, commit }, isUpdate) {
+  async find({ state, commit }, isUpdate) {
     // データが1件も存在していなければ、デフォルトの設定値をセット
     // そうでなければ DB から取得したデータをセット
-    Vue.prototype.$db.config.count({}, ((error, count) => {
+    await Vue.prototype.$db.config.count({}, ((error, count) => {
       if (count == 0) {
         commit('set', { config: {}, isDefault: true })
         if (isUpdate && state.config.notificationConfigUpdateNotify) {

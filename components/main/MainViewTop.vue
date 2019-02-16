@@ -63,8 +63,8 @@ export default
   name: 'MainViewFolderTop'
   mixins: [ HandleResizeMixin ]
   methods:
-    showDescriptionDialog: -> @$store.commit('state/descriptionDialogVisible', true)
-    showReleaseDialog: -> @$store.commit('state/releaseDialogVisible', true)
+    showDescriptionDialog: -> @$store.commit('app/descriptionDialogVisible', true)
+    showReleaseDialog: -> @$store.commit('app/releaseDialogVisible', true)
   components:
     'description-dialog': DescriptionDialog
     'release-Dialog': ReleaseDialog

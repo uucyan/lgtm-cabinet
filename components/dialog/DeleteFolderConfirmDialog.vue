@@ -23,7 +23,7 @@ export default
     message: String
   mixins: [ ChangeStyleMixin ]
   computed:
-    deleteFolderConfirmDialogVisible: -> @$store.state.state.deleteFolderConfirmDialogVisible
+    deleteFolderConfirmDialogVisible: -> @$store.state.app.deleteFolderConfirmDialogVisible
   methods:
     close:(isOk = false) ->
       @$emit('close', isOk)
