@@ -65,7 +65,7 @@ export default
   mounted: -> setTimeout(@sidebarFileTabOpen, 500)
   methods:
     select:(menuName, folder = null) ->
-      @$store.commit('state/selectMenu', menuName)
+      @$store.commit('app/selectMenu', menuName)
       if folder?
         @$store.dispatch('folders/getImagePaths', {folder: folder, imageListShowGifImage: @config.imageListShowGifImage})
         @$store.commit('folders/setSelectFolderName', folder.name)

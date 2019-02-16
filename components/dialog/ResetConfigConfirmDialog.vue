@@ -23,7 +23,7 @@ export default
     message: String
   mixins: [ ChangeStyleMixin ]
   computed:
-    resetConfigConfirmDialogVisible: -> @$store.state.state.resetConfigConfirmDialogVisible
+    resetConfigConfirmDialogVisible: -> @$store.state.app.resetConfigConfirmDialogVisible
   methods:
     close:(isOk = false) ->
       @$emit('close', isOk)

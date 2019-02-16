@@ -19,7 +19,7 @@ import MainViewTheDogApi from '~/components/main/MainViewTheDogApi.vue'
 export default
   name: 'MainView'
   computed:
-    selectedMenu: -> @$store.state.state.selectedMenu
+    selectedMenu: -> @$store.state.app.selectedMenu
   components:
     'main-view-top': MainViewTop
     'main-view-folder-management': MainViewFolderManagement

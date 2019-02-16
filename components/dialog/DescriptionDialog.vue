@@ -90,9 +90,9 @@ import ChangeStyleMixin from "~/components/dialog/ChangeStyleMixin.coffee"
 export default
   mixins: [ ChangeStyleMixin ]
   computed:
-    descriptionDialogVisible: -> @$store.state.state.descriptionDialogVisible
+    descriptionDialogVisible: -> @$store.state.app.descriptionDialogVisible
   methods:
-    close:() -> @$store.commit('state/descriptionDialogVisible', false)
+    close:() -> @$store.commit('app/descriptionDialogVisible', false)
 </script>
 
 <style lang="sass" scoped>

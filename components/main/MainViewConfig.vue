@@ -256,11 +256,11 @@ export default
     # 確認ダイアログの表示
     showConfirmDialog: ->
       @resetConfirmMessage = "設定を初期状態に戻しますか？"
-      @$store.commit('state/resetConfigConfirmDialogVisible', true)
+      @$store.commit('app/resetConfigConfirmDialogVisible', true)
 
     # 確認ダイアログを閉じる
     hideConfirmDialog:(isOk) ->
-      @$store.commit('state/resetConfigConfirmDialogVisible', false)
+      @$store.commit('app/resetConfigConfirmDialogVisible', false)
       if isOk is true
         @resetConfig()
       else

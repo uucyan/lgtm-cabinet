@@ -33,9 +33,9 @@ export default
     activeName: '1'
     ReleaseNote: new ReleaseNote
   computed:
-    releaseDialogVisible: -> @$store.state.state.releaseDialogVisible
+    releaseDialogVisible: -> @$store.state.app.releaseDialogVisible
   methods:
-    close: -> @$store.commit('state/releaseDialogVisible', false)
+    close: -> @$store.commit('app/releaseDialogVisible', false)
 </script>
 
 <style lang="sass" scoped>
