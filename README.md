@@ -1,4 +1,6 @@
-<img width="2000" alt="LGTM Cabinet" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
+<div align="center">
+  <img width="2000" alt="LGTM Cabinet" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
+</div>
 
 [![CircleCI](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master.svg?style=svg)](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master)
 ![Platform-macOS](https://img.shields.io/badge/-macOS-744d30.svg?style=flat&logo=apple)
