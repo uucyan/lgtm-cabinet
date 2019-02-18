@@ -12,56 +12,59 @@ module.exports = { ...prodRouterBase,
       { charset: 'utf-8' }
     ]
   }, // Headers of the page
+
   // loading: false, // Disable default loading bar
+
   loadingIndicator: {
     name: 'folding-cube',
     color: '#573216',
     background: 'white'
   },
+
   generate: {
     dir: 'dist/electron'
   },
+
   build: {
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        // Run ESLint on save
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          // loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
+    transpile: [/^element-ui/],
+
+    extend(config, ctx) {
       config.module.rules.push({
         test: /\.coffee$/,
         use: 'coffee-loader',
         exclude: /(node_modules)/
       })
-      // Extend only webpack config for client-bundle
-      if (isClient) { config.target = 'electron-renderer' }
+
+      config.target = 'electron-renderer'
     },
-    vendor: ['element-ui']
   },
+
   plugins: [
     '~plugins/element-ui.coffee',
     '~plugins/datastore.coffee',
     '~plugins/service.coffee',
   ],
+
   dev: process.env.NODE_ENV === 'DEV',
+
   css: [
-    '@/assets/sass/style.sass',
-    'element-ui/lib/theme-chalk/index.css',
+    '~assets/sass/style.sass',
+    'element-ui/lib/theme-chalk/index.css'
   ],
+
   modules: [
-    [
-      'nuxt-sass-resources-loader',
-      [
-        '@/assets/sass/variables/_color.sass',
-      ]
-    ],
+    '@nuxtjs/style-resources',
     '@nuxtjs/axios',
   ],
+
+  styleResources: {
+    sass: [
+      './assets/sass/variables/_color.sass',
+    ]
+  },
+
   axios: {
   },
+
   rootDir: __dirname
 }
