@@ -22,8 +22,10 @@ module.exports = { ...prodRouterBase,
     dir: 'dist/electron'
   },
   build: {
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
+    // extend (config, { isDev, isClient }) {
+    //   if (isDev && isClient) {
+    extend(config) {
+      if (process.server && process.browser) {
         // Run ESLint on save
         config.module.rules.push({
           enforce: 'pre',
@@ -32,13 +34,18 @@ module.exports = { ...prodRouterBase,
           exclude: /(node_modules)/
         })
       }
+      config.node = {
+        fs: "empty"
+      }
       config.module.rules.push({
         test: /\.coffee$/,
         use: 'coffee-loader',
         exclude: /(node_modules)/
       })
       // Extend only webpack config for client-bundle
-      if (isClient) { config.target = 'electron-renderer' }
+      if (process.server) {
+        config.target = 'electron-renderer'
+      }
     },
     vendor: ['element-ui']
   },
@@ -49,18 +56,27 @@ module.exports = { ...prodRouterBase,
   ],
   dev: process.env.NODE_ENV === 'DEV',
   css: [
-    '@/assets/sass/style.sass',
+    '~assets/sass/style.sass',
     'element-ui/lib/theme-chalk/index.css',
   ],
+  // modules: [
+  //   [
+  //     'nuxt-sass-resources-loader',
+  //     [
+  //       '@/assets/sass/variables/_color.sass',
+  //     ]
+  //   ],
+  //   '@nuxtjs/axios',
+  // ],
   modules: [
-    [
-      'nuxt-sass-resources-loader',
-      [
-        '@/assets/sass/variables/_color.sass',
-      ]
-    ],
+    '@nuxtjs/style-resources',
     '@nuxtjs/axios',
   ],
+  styleResources: {
+    ssss: [
+      './assets/sass/variables/_color.sass',
+    ]
+  },
   axios: {
   },
   rootDir: __dirname
