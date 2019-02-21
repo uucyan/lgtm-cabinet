@@ -34,18 +34,20 @@ module.exports = { ...prodRouterBase,
           exclude: /(node_modules)/
         })
       }
-      config.node = {
-        fs: "empty"
-      }
+      // config.node = {
+      //   fs: "empty"
+      // }
       config.module.rules.push({
         test: /\.coffee$/,
         use: 'coffee-loader',
         exclude: /(node_modules)/
       })
       // Extend only webpack config for client-bundle
-      if (process.server) {
-        config.target = 'electron-renderer'
-      }
+      // if (process.server) {
+      //   config.target = 'electron-renderer'
+      //   config.target = 'node'
+      // }
+      config.target = 'electron-renderer'
     },
     vendor: ['element-ui']
   },
@@ -73,7 +75,7 @@ module.exports = { ...prodRouterBase,
     '@nuxtjs/axios',
   ],
   styleResources: {
-    ssss: [
+    sass: [
       './assets/sass/variables/_color.sass',
     ]
   },
