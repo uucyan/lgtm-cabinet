@@ -43,7 +43,7 @@ const newWin = () => {
   win = new electron.BrowserWindow({
     icon: path.join(__dirname, iconPath),
     width: 1500,
-    height: 1000,
+    height: 1020,
     // backgroundColor: '$color-dark-brown'
   })
   win.on('closed', () => win = null)
