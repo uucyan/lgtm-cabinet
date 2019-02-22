@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="2000" alt="LGTM Cabinet" src="https://user-images.githubusercontent.com/19953599/52172881-3c44fd80-27bc-11e9-8912-236ab408db8d.png">
+  <img width="600" alt="LGTM Cabinet" src="https://user-images.githubusercontent.com/19953599/53265708-43f42400-3722-11e9-9fd0-b5122192b880.png">
 </div>
 
 [![CircleCI](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master.svg?style=svg)](https://circleci.com/gh/uucyan/lgtm-cabinet/tree/master)
